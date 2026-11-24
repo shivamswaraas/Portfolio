@@ -1,0 +1,3078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivam Prateek — Brand Psychology &amp; Copy</title>
+  <meta name="description" content="Shivam Prateek — Interactive studio archive. Touch anything on the shelves." />
+
+  <!-- Editorial Typography: Cormorant Garamond, Inter, IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & EXACT 32PX STUDIO DRAFTING GRID
+       ========================================================================== */
+    :root {
+      --white: #FFFFFF;
+      --paper: #FFFFFF;
+      --grid-line: #E6E6EC;
+      --ink: #1B1714;
+      --muted: #5C554F;
+      --walnut-top: #744D33;
+      --walnut-mid: #5D3B26;
+      --walnut-deep: #3E2516;
+      --terracotta: #B85334;
+      --gold: #F2B418;
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* Dynamically updated on image load so width/height stay 100% locked */
+      --img-ratio: 0.9337;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      background-color: var(--white);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ink);
+      background-color: var(--white);
+      background-image:
+        linear-gradient(to right, #E6E6EC 1px, transparent 1px),
+        linear-gradient(to bottom, #E6E6EC 1px, transparent 1px);
+      background-size: 32px 32px;
+      min-height: 100svh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    /* ==========================================================================
+       2. MINIMAL TOP HEADER BAR (ZERO PITCHING)
+       ========================================================================== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      width: 100%;
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 1.1rem clamp(1.1rem, 3vw, 2.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .brand-name {
+      pointer-events: auto;
+      font-family: var(--font-sans);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(3px);
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .top-nav {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(3px);
+      padding: 0.25rem 0.55rem;
+      border-radius: 3px;
+    }
+
+    .top-link {
+      position: relative;
+      padding: 0.2rem 0;
+      color: var(--muted);
+      transition: color 180ms var(--ease-out);
+    }
+
+    .top-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--terracotta);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 200ms var(--ease-out);
+    }
+
+    .top-link:hover {
+      color: var(--ink);
+    }
+
+    .top-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* ==========================================================================
+       3. STUDIO ROOM & PERSPECTIVE FLOOR STRIP
+       ========================================================================== */
+    .studio-room {
+      position: relative;
+      width: 100%;
+      max-width: 1480px;
+      margin: 0 auto;
+      height: 100svh;
+      min-height: 660px;
+      overflow: hidden;
+    }
+
+    /* Subtle studio perspective floor grid strip along the bottom edge */
+    .studio-floor {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 112px;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      border-top: 1px solid #DFDFE8;
+      background: linear-gradient(180deg, rgba(246, 246, 250, 0.7) 0%, rgba(255, 255, 255, 0.96) 55%, #FFFFFF 100%);
+    }
+
+    .studio-floor-grid {
+      position: absolute;
+      left: -30%;
+      right: -30%;
+      top: 0;
+      height: 240px;
+      background-image:
+        linear-gradient(to right, rgba(208, 208, 218, 0.72) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(208, 208, 218, 0.72) 1px, transparent 1px);
+      background-size: 46px 32px;
+      transform-origin: top center;
+      transform: perspective(280px) rotateX(58deg);
+      opacity: 0.75;
+    }
+
+    /* ==========================================================================
+       4. DEADPAN EDITORIAL SPEECH BUBBLE
+       ========================================================================== */
+    .speech-bubble {
+      position: absolute;
+      left: clamp(20px, 4.2vw, 76px);
+      top: clamp(68px, 11vh, 116px);
+      z-index: 25;
+      max-width: min(335px, 34vw);
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 14px;
+      padding: 0.7rem 1rem;
+      box-shadow: 4px 4px 0 rgba(27, 23, 20, 0.92);
+      pointer-events: auto;
+      transition: transform 220ms var(--ease-spring), box-shadow 220ms var(--ease-out);
+    }
+
+    .speech-bubble.pop {
+      transform: translateY(-2px) scale(1.018);
+      box-shadow: 5px 5px 0 var(--gold);
+    }
+
+    .speech-bubble::before {
+      content: "";
+      position: absolute;
+      left: 26%;
+      bottom: -8px;
+      width: 13px;
+      height: 13px;
+      background: var(--paper);
+      border-right: 1.5px solid var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    .speech-text {
+      position: relative;
+      z-index: 2;
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.48;
+      color: var(--ink);
+    }
+
+    /* ==========================================================================
+       5. SEATED CUTOUT & ZOOM/RESIZE-PROOF ALMOND TRACKING EYES
+       ========================================================================== */
+    .cutout-anchor {
+      position: absolute;
+      left: clamp(-14px, 0.6vw, 24px);
+      bottom: 0;
+      z-index: 10;
+      /* CRITICAL: Transparent PNG margins NEVER block clicking the shelves behind him */
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /*
+       CRITICAL RESIZE & ZOOM LOCK ARCHITECTURE:
+       .cutout-box wraps ONLY the <img> and .eyes-layer with zero padding/border.
+       Width is computed from target height * natural aspect ratio, while height
+       remains auto so .cutout-img (width:100%; height:auto) dictates the exact
+       bounding box to the sub-pixel at every screen size and 50%-300% zoom.
+    */
+    .cutout-box {
+      position: relative;
+      display: block;
+      line-height: 0;
+      padding: 0;
+      border: 0;
+      width: min(calc(min(82vh, 760px) * var(--img-ratio)), 47vw);
+      pointer-events: none;
+    }
+
+    .cutout-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 12px 22px rgba(27, 23, 20, 0.08));
+    }
+
+    /* Graceful transparent vector fallback ONLY if image files are missing in a local sandbox */
+    .cutout-fallback-svg {
+      display: none;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    .eyes-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* Exact % locked eye anchors matching Seated Man Sticker Cutout_2.png */
+    .eye-anchor {
+      position: absolute;
+      pointer-events: none;
+      transform: translate(-50%, -50%) rotate(-6deg);
+    }
+
+    .eye-anchor--left {
+      left: 28.4%;
+      top: 29.9%;
+      width: 3.7%;
+      height: 1.95%;
+    }
+
+    .eye-anchor--right {
+      left: 34.0%;
+      top: 29.1%;
+      width: 3.7%;
+      height: 1.95%;
+    }
+
+    /* Expressive crisp ALMOND-SHAPED eye socket (NEVER a round circle) */
+    .eye-socket {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 52% 48% 50% 50% / 64% 64% 38% 38%;
+      background: radial-gradient(circle at 50% 45%, #FFFFFF 0%, #FAF7F3 72%, #EAE2DA 100%);
+      border-top: 2.2px solid #16110E;
+      border-left: 1px solid rgba(27, 23, 20, 0.65);
+      border-right: 1px solid rgba(27, 23, 20, 0.65);
+      border-bottom: 1px solid rgba(92, 72, 60, 0.45);
+      box-shadow:
+        inset 0 2px 3px rgba(27, 23, 20, 0.28),
+        inset 0 -1px 2px rgba(138, 102, 82, 0.16),
+        0 1px 1.5px rgba(27, 23, 20, 0.16);
+      overflow: hidden;
+      transform-origin: center 54%;
+      transition: transform 85ms ease-in-out;
+    }
+
+    .eye-socket.is-blinking {
+      transform: scaleY(0.08);
+    }
+
+    /* Proportional espresso-black iris + dark pupil center + crisp white catchlight */
+    .eye-iris {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      height: 82%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 46% 42%, #442819 0%, #23140D 56%, #0D0907 100%);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.55);
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    .eye-pupil-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 52%;
+      height: 52%;
+      border-radius: 50%;
+      background: #080605;
+      transform: translate(-50%, -50%);
+    }
+
+    .eye-catchlight {
+      position: absolute;
+      left: 24%;
+      top: 18%;
+      width: 28%;
+      height: 28%;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .eye-catchlight-mini {
+      position: absolute;
+      right: 22%;
+      bottom: 20%;
+      width: 12%;
+      height: 12%;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    /* Targeted interactive hotspots ONLY over his face and coffee mug */
+    .hotspot {
+      position: absolute;
+      z-index: 6;
+      pointer-events: auto;
+      cursor: pointer;
+      border-radius: 50%;
+      background: transparent;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hotspot--face {
+      left: 31%;
+      top: 30%;
+      width: 16%;
+      height: 19%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hotspot--mug {
+      left: 7%;
+      top: 60.5%;
+      width: 9%;
+      height: 8%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ==========================================================================
+       6. THREE WALNUT FLOATING SHELVES WALL (BEHIND / BESIDE CUTOUT)
+       ========================================================================== */
+    .shelves-wall {
+      position: absolute;
+      z-index: 2;
+      right: clamp(18px, 3.2vw, 52px);
+      left: clamp(385px, 42%, 595px);
+      top: clamp(66px, 9.5vh, 108px);
+      bottom: clamp(46px, 6.5vh, 84px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .shelf-unit {
+      position: relative;
+      width: 100%;
+    }
+
+    .shelf-kicker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      padding: 0 0.25rem;
+    }
+
+    .shelf-kicker-text {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 0.06rem 0.35rem;
+    }
+
+    .shelf-kicker-text span {
+      color: var(--terracotta);
+    }
+
+    .shelf-items {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      gap: 0.55rem;
+      padding: 0 0.85rem;
+      min-height: 104px;
+    }
+
+    /* Beveled Architectural Walnut Shelf Plank */
+    .shelf-plank {
+      position: relative;
+      z-index: 4;
+      width: 100%;
+      height: 16px;
+      border-radius: 2px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03) 0px,
+          rgba(255, 255, 255, 0.03) 20px,
+          rgba(0, 0, 0, 0.055) 20px,
+          rgba(0, 0, 0, 0.055) 46px
+        ),
+        linear-gradient(180deg, var(--walnut-top) 0%, var(--walnut-mid) 35%, var(--walnut-deep) 100%);
+      border-top: 1px solid rgba(255, 232, 208, 0.28);
+      border-bottom: 2.5px solid #24140B;
+      box-shadow:
+        0 14px 20px rgba(27, 23, 20, 0.14),
+        0 4px 6px rgba(27, 23, 20, 0.16);
+    }
+
+    .shelf-plank::before,
+    .shelf-plank::after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      width: 6px;
+      height: 10px;
+      background: #1D1A18;
+      border-radius: 0 0 2px 2px;
+      box-shadow: 0 3px 5px rgba(27, 23, 20, 0.22);
+    }
+
+    .shelf-plank::before { left: 9%; }
+    .shelf-plank::after { right: 9%; }
+
+    .shelf-labels {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      gap: 0.55rem;
+      padding: 0.48rem 0.85rem 0;
+    }
+
+    .shelf-label-slot {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.25;
+      pointer-events: none;
+      transition: color 180ms var(--ease-out);
+    }
+
+    .shelf-label-slot span {
+      color: var(--muted);
+      margin-right: 0.2rem;
+    }
+
+    .shelf-label-slot.is-active {
+      color: var(--terracotta);
+    }
+
+    /* Tactile Clickable Shelf Objects */
+    .shelf-obj {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0.2rem 0.2rem 0;
+      margin-bottom: -2px;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .shelf-obj > svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      overflow: visible;
+      filter: drop-shadow(0 5px 6px rgba(27, 23, 20, 0.14));
+      transition: transform 280ms var(--ease-spring), filter 240ms var(--ease-out);
+    }
+
+    .shelf-obj:hover > svg,
+    .shelf-obj:focus-visible > svg {
+      transform: translateY(-9px) rotate(-1.6deg) scale(1.04);
+      filter:
+        drop-shadow(0 13px 16px rgba(27, 23, 20, 0.18))
+        drop-shadow(0 0 9px rgba(242, 180, 24, 0.42));
+    }
+
+    .shelf-obj.tilt-right:hover > svg,
+    .shelf-obj.tilt-right:focus-visible > svg {
+      transform: translateY(-9px) rotate(1.8deg) scale(1.04);
+    }
+
+    /* Floating hover tooltip */
+    .obj-tip {
+      position: absolute;
+      bottom: calc(100% + 9px);
+      left: 50%;
+      transform: translateX(-50%) translateY(5px);
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      padding: 0.26rem 0.52rem;
+      border-radius: 3px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+      z-index: 30;
+    }
+
+    .obj-tip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -4px;
+      border: 4px solid transparent;
+      border-top-color: var(--ink);
+    }
+
+    .shelf-obj:hover .obj-tip,
+    .shelf-obj:focus-visible .obj-tip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Draped thermal receipt hanging over Shelf 03 edge */
+    .obj-receipt {
+      margin-bottom: -30px;
+      z-index: 7;
+    }
+
+    .obj-receipt:hover > svg,
+    .obj-receipt:focus-visible > svg {
+      transform: translateY(-8px) rotate(-1deg) scale(1.03);
+    }
+
+    /* Askew wax-sealed envelope */
+    .obj-envelope > svg {
+      transform: rotate(2.6deg);
+    }
+
+    .obj-envelope:hover > svg,
+    .obj-envelope:focus-visible > svg {
+      transform: translateY(-10px) rotate(-1.2deg) scale(1.05);
+    }
+
+    /* ==========================================================================
+       7. DAVE THE CACTUS — PROGRESSIVE ENDLESS GROWTH ANIMATIONS
+       ========================================================================== */
+    .obj-dave {
+      overflow: visible;
+    }
+
+    /* Subtle water counter pill beside Dave's pot (hidden until first watering) */
+    .dave-water-badge {
+      position: absolute;
+      right: 4%;
+      bottom: 6px;
+      z-index: 12;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 600;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      padding: 0.1rem 0.38rem;
+      box-shadow: 2px 2px 0 rgba(27, 23, 20, 0.85);
+      opacity: 0;
+      transform: scale(0.6);
+      pointer-events: none;
+      transition: opacity 220ms ease, transform 300ms var(--ease-spring);
+    }
+
+    .dave-water-badge.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #davePlantGroup {
+      transform-origin: 44px 66px;
+      transition: transform 440ms var(--ease-spring);
+    }
+
+    #daveTrunkGroup {
+      transform-origin: 44px 66px;
+      transition: transform 480ms var(--ease-spring);
+    }
+
+    .obj-dave.growth-bounce #davePlantGroup {
+      animation: daveBounce 460ms var(--ease-spring);
+    }
+
+    @keyframes daveBounce {
+      0% { transform: scale(1, 1); }
+      32% { transform: scale(1.1, 0.9); }
+      68% { transform: scale(0.95, 1.08); }
+      100% { transform: scale(1, 1); }
+    }
+
+    /* Milestone stage parts start hidden and spring open on unlock */
+    .dave-stage {
+      opacity: 0;
+      transform: scale(0);
+      transition: transform 520ms var(--ease-spring), opacity 260ms ease;
+    }
+
+    .dave-stage.unlocked {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Procedural endless growth nodes pop in with spring animation */
+    @keyframes nodePopIn {
+      0% { opacity: 0; transform: scale(0) rotate(-18deg); }
+      72% { opacity: 1; transform: scale(1.16) rotate(4deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    .proc-node {
+      animation: nodePopIn 460ms var(--ease-spring) forwards;
+    }
+
+    /* Water droplet splash */
+    .water-drops {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .obj-dave.watering .water-drops {
+      animation: waterSplash 680ms ease-out forwards;
+    }
+
+    @keyframes waterSplash {
+      0% { opacity: 0; transform: translateY(-22px) scale(0.8); }
+      25% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(18px) scale(1.05); }
+    }
+
+    /* Animated yellow butterfly & golden sparkles (Stage 6+) */
+    .dave-butterfly {
+      animation: butterflyFloat 3.6s ease-in-out infinite;
+      transform-origin: 64px -26px;
+    }
+
+    .butterfly-wing-l {
+      transform-origin: 64px -26px;
+      animation: wingFlapL 0.34s ease-in-out infinite alternate;
+    }
+
+    .butterfly-wing-r {
+      transform-origin: 64px -26px;
+      animation: wingFlapR 0.34s ease-in-out infinite alternate;
+    }
+
+    @keyframes butterflyFloat {
+      0%, 100% { transform: translate(0px, 0px) rotate(-4deg); }
+      35% { transform: translate(-10px, -9px) rotate(6deg); }
+      70% { transform: translate(7px, -5px) rotate(-8deg); }
+    }
+
+    @keyframes wingFlapL {
+      from { transform: scaleX(1) rotate(0deg); }
+      to { transform: scaleX(0.35) rotate(14deg); }
+    }
+
+    @keyframes wingFlapR {
+      from { transform: scaleX(1) rotate(0deg); }
+      to { transform: scaleX(0.35) rotate(-14deg); }
+    }
+
+    .dave-sparkle {
+      animation: sparklePulse 2.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes sparklePulse {
+      from { opacity: 0.25; transform: scale(0.7); }
+      to { opacity: 1; transform: scale(1.18); }
+    }
+
+    /* ==========================================================================
+       8. STUDIO MODALS (LANDING PAGES, RED-PEN, RECEIPTS, MENTALIST ENVELOPE)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(27, 23, 20, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.1rem;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      animation: fadeIn 180ms ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 600px;
+      max-height: 88svh;
+      overflow-y: auto;
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 9px 9px 0 rgba(27, 23, 20, 0.92);
+      position: relative;
+      animation: cardRise 240ms var(--ease-out) forwards;
+    }
+
+    @keyframes cardRise {
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.88rem 1.3rem;
+      border-bottom: 1px solid var(--grid-line);
+      background: #F8F8FA;
+      position: sticky;
+      top: 0;
+      z-index: 4;
+    }
+
+    .modal-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .modal-close {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 0.26rem 0.58rem;
+      border: 1px solid var(--grid-line);
+      border-radius: 3px;
+      color: var(--muted);
+      transition: all 140ms ease;
+    }
+
+    .modal-close:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .modal-body {
+      padding: 1.35rem 1.45rem 1.55rem;
+    }
+
+    .modal-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 1.1rem;
+      color: var(--ink);
+    }
+
+    /* --- Modal 1: Landing Pages --- */
+    .lp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.68rem;
+    }
+
+    .lp-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.05rem;
+      border: 1px solid var(--grid-line);
+      border-radius: 4px;
+      background: var(--paper);
+      transition: transform 180ms var(--ease-out), border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .lp-item:hover {
+      transform: translateX(4px);
+      border-color: var(--ink);
+      box-shadow: 4px 4px 0 var(--gold);
+    }
+
+    .lp-name {
+      display: block;
+      font-weight: 600;
+      font-size: 0.96rem;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+
+    .lp-sub {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .lp-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      color: var(--terracotta);
+    }
+
+    .lp-hub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.1rem;
+      font-family: var(--font-mono);
+      font-size: 0.71rem;
+      color: var(--muted);
+      border-bottom: 1px dashed var(--muted);
+      padding-bottom: 2px;
+      transition: color 150ms ease, border-color 150ms ease;
+    }
+
+    .lp-hub-link:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* --- Modal 2: Red-Pen Edits --- */
+    .rp-tabs {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+
+    .rp-tab {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.42rem 0.8rem;
+      border: 1px solid var(--grid-line);
+      border-radius: 999px;
+      color: var(--muted);
+      transition: all 150ms ease;
+    }
+
+    .rp-tab.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .manuscript-box {
+      background: #FCFBF7;
+      border: 1px solid #E4DFD3;
+      border-radius: 4px;
+      padding: 1.25rem 1.35rem;
+      background-image: linear-gradient(to bottom, transparent 31px, rgba(27, 23, 20, 0.05) 32px);
+      background-size: 100% 32px;
+    }
+
+    .ms-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.42rem;
+    }
+
+    .before-copy {
+      font-family: var(--font-sans);
+      font-size: 0.93rem;
+      line-height: 1.65;
+      color: #7D7872;
+    }
+
+    .red-slash {
+      display: inline;
+      background-image: linear-gradient(transparent 45%, var(--terracotta) 46%, var(--terracotta) 56%, transparent 57%);
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+      animation: drawRedSlash 580ms var(--ease-out) 120ms forwards;
+    }
+
+    @keyframes drawRedSlash {
+      to { background-size: 100% 100%; }
+    }
+
+    .after-block {
+      margin-top: 1.1rem;
+      padding-top: 0.95rem;
+      border-top: 1px dashed rgba(184, 83, 52, 0.38);
+    }
+
+    .after-copy {
+      font-family: var(--font-serif);
+      font-size: clamp(1.38rem, 2.7vw, 1.76rem);
+      font-weight: 500;
+      line-height: 1.28;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+
+    .after-copy em {
+      color: var(--terracotta);
+      font-style: italic;
+    }
+
+    .margin-note {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: var(--terracotta);
+      border-left: 2.5px solid var(--terracotta);
+      padding-left: 0.72rem;
+    }
+
+    /* --- Modal 3: Thermal Receipts --- */
+    .modal-card.receipt-card {
+      max-width: 470px;
+      background: #FCFBF8;
+    }
+
+    .receipt-head {
+      text-align: center;
+      padding-bottom: 0.9rem;
+      margin-bottom: 0.95rem;
+      border-bottom: 1.5px dashed #C8C3B8;
+      font-family: var(--font-mono);
+    }
+
+    .receipt-head h3 {
+      font-size: 0.94rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .receipt-head p {
+      font-size: 0.64rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .receipt-metrics {
+      list-style: none;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.95rem;
+      border-bottom: 1.5px dashed #C8C3B8;
+    }
+
+    .receipt-metrics li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.42rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .receipt-val {
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .receipt-key {
+      color: var(--muted);
+      text-align: right;
+      font-size: 0.68rem;
+    }
+
+    .redact-hint {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--terracotta);
+      margin-bottom: 0.6rem;
+    }
+
+    .redact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .redact-bar {
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.69rem;
+      padding: 0.52rem 0.7rem;
+      border-radius: 2px;
+      background: var(--ink);
+      color: var(--ink);
+      position: relative;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .redact-bar::after {
+      content: "TAP TO TEST NDA CLEARANCE";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.59rem;
+      letter-spacing: 0.14em;
+    }
+
+    .redact-bar:hover::after {
+      color: var(--gold);
+    }
+
+    .redact-bar.revealed {
+      background: #EFECE4;
+      color: var(--ink);
+      border: 1px dashed #B5B0A4;
+    }
+
+    .redact-bar.revealed::after {
+      display: none;
+    }
+
+    /* --- Modal 4: Silent Mentalist Envelope --- */
+    .modal-card.envelope-card {
+      max-width: 560px;
+      background: #FAF6EC;
+    }
+
+    .wax-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .wax-seal-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #D96540 0%, var(--terracotta) 66%, #7E2912 100%);
+      color: #FAF6EC;
+      font-family: var(--font-serif);
+      font-size: 1.12rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 4px 10px rgba(184, 83, 52, 0.32);
+    }
+
+    .env-meta-stamp {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    .env-read-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .env-read-lines p {
+      font-family: var(--font-serif);
+      font-size: clamp(1.32rem, 2.5vw, 1.62rem);
+      font-weight: 500;
+      line-height: 1.32;
+      color: var(--ink);
+    }
+
+    .env-read-lines em {
+      color: var(--terracotta);
+      font-style: italic;
+    }
+
+    .env-ps {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.71rem;
+      line-height: 1.5;
+      color: #4A443C;
+      background: rgba(242, 180, 24, 0.16);
+      border-left: 2.5px solid var(--gold);
+      padding: 0.58rem 0.82rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .env-ps.visible {
+      display: block;
+    }
+
+    .env-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.72rem 1.1rem;
+      padding-top: 1.05rem;
+      border-top: 1px solid rgba(27, 23, 20, 0.14);
+    }
+
+    .btn-write {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.12rem;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 4px;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .btn-write:hover {
+      background: var(--terracotta);
+      transform: translateY(-1px);
+    }
+
+    .env-util-btn {
+      font-family: var(--font-mono);
+      font-size: 0.69rem;
+      color: var(--muted);
+      border-bottom: 1px solid transparent;
+      padding-bottom: 1px;
+      transition: color 150ms ease, border-color 150ms ease;
+    }
+
+    .env-util-btn:hover {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    /* ==========================================================================
+       9. MOBILE STUDIO ROOM (<= 820px)
+          CRITICAL: Shelves stay BEHIND the seated cutout (z-index 2 vs 10).
+          Cutout takes ~60% of the screen height (60svh) bottom-left while
+          all 12 shelf items sit cleanly visible & tappable behind/beside him.
+       ========================================================================== */
+    @media (max-width: 820px) {
+      .topbar {
+        padding: 0.7rem 0.85rem;
+      }
+
+      .brand-name {
+        font-size: 0.74rem;
+        letter-spacing: 0.15em;
+      }
+
+      .top-nav {
+        gap: 0.85rem;
+        font-size: 0.68rem;
+      }
+
+      .studio-room {
+        height: 100svh;
+        min-height: 640px;
+        overflow: hidden;
+      }
+
+      .studio-floor {
+        height: 76px;
+      }
+
+      /* Compact deadpan speech bubble cleanly tucked beneath topbar */
+      .speech-bubble {
+        left: 0.75rem;
+        right: 0.75rem;
+        top: 2.85rem;
+        max-width: none;
+        width: auto;
+        padding: 0.45rem 0.72rem;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0 rgba(27, 23, 20, 0.9);
+      }
+
+      .speech-bubble::before {
+        display: none;
+      }
+
+      .speech-text {
+        font-size: 0.65rem;
+        line-height: 1.35;
+      }
+
+      /* Seated cutout takes ~60% screen height, anchored cleanly at bottom-left */
+      .cutout-anchor {
+        left: -5vw;
+        bottom: 0;
+        z-index: 10;
+      }
+
+      .cutout-box {
+        width: calc(60svh * var(--img-ratio));
+        max-width: 112vw;
+      }
+
+      /* Shelves wall stays behind him (z-index: 2) across the full room */
+      .shelves-wall {
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+        display: block;
+      }
+
+      .shelf-kicker {
+        display: none;
+      }
+
+      /* Shelf 1: Top wall cleanly above his head */
+      .shelf-unit--1 {
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        top: 13.5svh;
+      }
+
+      /* Shelf 2: Mid-upper wall right above/behind his head */
+      .shelf-unit--2 {
+        position: absolute;
+        left: 0.6rem;
+        right: 0.6rem;
+        top: 29.8svh;
+      }
+
+      /* Shelf 3: Open right wall behind his chair armrest (zero overlap with torso) */
+      .shelf-unit--3 {
+        position: absolute;
+        left: 43vw;
+        right: 0.55rem;
+        top: 46.8svh;
+      }
+
+      .shelf-items {
+        min-height: 58px;
+        padding: 0 0.25rem;
+        gap: 0.2rem;
+      }
+
+      .shelf-plank {
+        height: 11px;
+        border-bottom-width: 2px;
+      }
+
+      .shelf-plank::before,
+      .shelf-plank::after {
+        top: 11px;
+        height: 7px;
+        width: 5px;
+      }
+
+      .shelf-labels {
+        padding: 0.3rem 0.2rem 0;
+        gap: 0.18rem;
+      }
+
+      .shelf-label-slot {
+        font-size: 0.48rem;
+        letter-spacing: 0.02em;
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 2px;
+        padding: 0.06rem 0.1rem;
+      }
+
+      .shelf-label-slot span {
+        display: none;
+      }
+
+      .shelf-obj {
+        padding: 0.12rem 0.1rem 0;
+      }
+
+      .shelf-obj > svg {
+        max-height: 56px;
+        width: auto;
+      }
+
+      .shelf-unit--3 .shelf-obj > svg {
+        max-height: 50px;
+      }
+
+      .obj-receipt {
+        margin-bottom: -18px;
+      }
+
+      .obj-tip {
+        display: none;
+      }
+
+      .dave-water-badge {
+        font-size: 0.5rem;
+        padding: 0.06rem 0.28rem;
+        right: 0;
+        bottom: 2px;
+      }
+
+      /* Full-width bottom-sheet feel for modals on phones */
+      .modal-backdrop {
+        align-items: flex-end;
+        padding: 0.5rem;
+      }
+
+      .modal-card {
+        max-height: 84svh;
+        box-shadow: 0 -4px 24px rgba(27, 23, 20, 0.25);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .shelf-unit--3 {
+        left: 41vw;
+      }
+
+      .shelf-obj > svg {
+        max-height: 49px;
+      }
+
+      .shelf-label-slot {
+        font-size: 0.45rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. MINIMAL TOP HEADER BAR
+       ======================================================================== -->
+  <header class="topbar">
+    <span class="brand-name">SHIVAM PRATEEK</span>
+    <nav class="top-nav" aria-label="Contact links">
+      <a href="https://linkedin.com/in/shivamswaraas" target="_blank" rel="noopener noreferrer" class="top-link">LinkedIn</a>
+      <a href="mailto:ShivamSwaraas@Gmail.com" class="top-link">Email</a>
+    </nav>
+  </header>
+
+  <!-- Subtle Studio Floor Perspective Grid Strip -->
+  <div class="studio-floor" aria-hidden="true">
+    <div class="studio-floor-grid"></div>
+  </div>
+
+  <!-- ========================================================================
+       2. INTERACTIVE STUDIO ROOM
+       ======================================================================== -->
+  <main class="studio-room">
+
+    <!-- DRY DEADPAN FLOATING SPEECH BUBBLE -->
+    <div class="speech-bubble" id="speechBubble" role="status" aria-live="polite">
+      <span class="speech-text" id="speechText">Go ahead. Touch anything on the shelves. I'm definitely not judging.</span>
+    </div>
+
+    <!-- ======================================================================
+         THREE ARCHITECTURAL WALNUT FLOATING SHELVES (Z-INDEX 2 — BEHIND CUTOUT)
+         ====================================================================== -->
+    <section class="shelves-wall" aria-label="Portfolio shelves">
+
+      <!-- ====================================================================
+           SHELF 01 — FLAGSHIP WORK & DAVE
+           ==================================================================== -->
+      <div class="shelf-unit shelf-unit--1">
+        <div class="shelf-kicker">
+          <span class="shelf-kicker-text"><span>01 //</span> FLAGSHIP WORK</span>
+        </div>
+
+        <div class="shelf-items">
+          <!-- 01. LANDING PAGES (Minimalist Wireframe Browser Frame) -->
+          <button
+            type="button"
+            class="shelf-obj"
+            data-id="landing-pages"
+            data-label-slot="lbl-01"
+            data-name="Landing Pages"
+            data-instinct="craft"
+            data-trait="conversion architecture before decorative headlines"
+            data-bubble="Pages built to stop price wars before they start."
+            data-action="modal-landing"
+            aria-label="Open Landing Pages showcase"
+          >
+            <span class="obj-tip">4 live links &middot; click</span>
+            <svg width="94" height="100" viewBox="0 0 96 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="9" y="16" width="78" height="78" rx="4" fill="#1B1714" />
+              <rect x="13" y="20" width="70" height="70" rx="2.5" fill="#FFFFFF" stroke="#1B1714" stroke-width="1.2" />
+              <rect x="13" y="20" width="70" height="12" rx="2" fill="#F2F1EE" />
+              <line x1="13" y1="32" x2="83" y2="32" stroke="#E0DDD6" stroke-width="1" />
+              <circle cx="20" cy="26" r="2" fill="#B85334" />
+              <circle cx="26.5" cy="26" r="2" fill="#F2B418" />
+              <circle cx="33" cy="26" r="2" fill="#1B1714" />
+              <rect x="20" y="39" width="42" height="6" rx="1" fill="#1B1714" />
+              <rect x="20" y="49" width="54" height="3.2" rx="1" fill="#B8B4AC" />
+              <rect x="20" y="55" width="46" height="3.2" rx="1" fill="#B8B4AC" />
+              <rect x="20" y="64" width="26" height="10" rx="2" fill="#B85334" />
+              <rect x="51" y="64" width="23" height="10" rx="2" fill="#F2F1EE" stroke="#1B1714" stroke-width="1" />
+              <rect x="22" y="94" width="52" height="8" rx="2" fill="#3E2516" stroke="#1B1714" stroke-width="1.3" />
+            </svg>
+          </button>
+
+          <!-- 02. EMAILS (Folded Broadsheet Newspaper) -->
+          <a
+            href="https://shivamsnewsletterportfolio.edgeone.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj tilt-right"
+            data-id="emails"
+            data-label-slot="lbl-02"
+            data-name="Emails"
+            data-instinct="craft"
+            data-trait="inbox voice and retention over cheap urgency"
+            data-bubble="Emails people actually open without sighing first."
+            aria-label="Open Emails & Newsletters portfolio"
+          >
+            <span class="obj-tip">Open archive &nearr;</span>
+            <svg width="96" height="94" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="15" y="14" width="74" height="80" rx="2" fill="#E6E0D4" stroke="#1B1714" stroke-width="1.4" transform="rotate(3 52 54)" />
+              <rect x="9" y="12" width="74" height="82" rx="2" fill="#FAF7F0" stroke="#1B1714" stroke-width="1.6" />
+              <line x1="16" y1="26" x2="76" y2="26" stroke="#1B1714" stroke-width="1.4" />
+              <line x1="16" y1="29" x2="76" y2="29" stroke="#1B1714" stroke-width="0.7" />
+              <text x="46" y="23" text-anchor="middle" fill="#1B1714" font-family="Cormorant Garamond, Georgia, serif" font-size="9.5" font-weight="600" letter-spacing="0.8">THE OPEN RATE</text>
+              <rect x="16" y="35" width="33" height="20" rx="1" fill="#1B1714" />
+              <path d="M19 39 L32.5 47.5 L46 39" stroke="#F2B418" stroke-width="1.5" fill="none" />
+              <rect x="54" y="35" width="22" height="3.5" fill="#1B1714" />
+              <rect x="54" y="42" width="19" height="2.5" fill="#9A948A" />
+              <rect x="54" y="47" width="21" height="2.5" fill="#9A948A" />
+              <rect x="54" y="52" width="16" height="2.5" fill="#9A948A" />
+              <rect x="16" y="61" width="60" height="2.5" fill="#B5AFA4" />
+              <rect x="16" y="67" width="52" height="2.5" fill="#B5AFA4" />
+              <rect x="16" y="73" width="58" height="2.5" fill="#B5AFA4" />
+              <rect x="16" y="79" width="36" height="2.6" fill="#B85334" />
+            </svg>
+          </a>
+
+          <!-- 03. SaaS (Linen Hardcover Book with Spine Title) -->
+          <a
+            href="https://believetheprosaascopywriting.edgeone.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj"
+            data-id="saas-articles"
+            data-label-slot="lbl-03"
+            data-name="SaaS"
+            data-instinct="craft"
+            data-trait="substance that survives skeptical B2B readers"
+            data-bubble="Zero 'In today's fast-paced digital landscape.' Promise."
+            aria-label="Open SaaS Articles portfolio"
+          >
+            <span class="obj-tip">Read articles &nearr;</span>
+            <svg width="78" height="104" viewBox="0 0 80 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M47 4 L56 4 L56 24 L51.5 19 L47 24 Z" fill="#B85334" />
+              <rect x="16" y="14" width="46" height="92" rx="3" fill="#231E1B" stroke="#120F0D" stroke-width="1.6" />
+              <rect x="18" y="16" width="5" height="88" fill="rgba(255,255,255,0.08)" />
+              <line x1="17" y1="27" x2="61" y2="27" stroke="#F2B418" stroke-width="1.4" />
+              <line x1="17" y1="91" x2="61" y2="91" stroke="#F2B418" stroke-width="1.4" />
+              <rect x="23" y="40" width="32" height="36" rx="1.5" fill="#FAF6EC" />
+              <text x="39" y="56" text-anchor="middle" fill="#1B1714" font-family="Cormorant Garamond, Georgia, serif" font-size="15" font-weight="600">SaaS</text>
+              <text x="39" y="68" text-anchor="middle" fill="#B85334" font-family="IBM Plex Mono, monospace" font-size="6.4" font-weight="600" letter-spacing="0.8">VOL. IV</text>
+              <rect x="62" y="18" width="5" height="86" rx="1" fill="#F2ECE0" stroke="#1B1714" stroke-width="1" />
+            </svg>
+          </a>
+
+          <!-- 04. DAVE THE CACTUS (Progressive Endless Growth SVG) -->
+          <button
+            type="button"
+            class="shelf-obj obj-dave"
+            id="daveCactus"
+            data-id="dave"
+            data-label-slot="lbl-dave"
+            data-bubble="That's Dave. The only team member who doesn't drink coffee."
+            aria-label="Water Dave the potted cactus"
+          >
+            <span class="obj-tip" id="daveTip">Click to water Dave</span>
+            <span class="dave-water-badge" id="daveWaterBadge" aria-hidden="true">&#128167; 0</span>
+
+            <svg id="daveSvg" width="88" height="96" viewBox="0 0 88 96" fill="none" overflow="visible" xmlns="http://www.w3.org/2000/svg">
+              <!-- Water Droplet Splash -->
+              <g class="water-drops" fill="#4BA3E3">
+                <path d="M31 4 C31 4 27 10 27 12.5 C27 14.7 28.8 16.5 31 16.5 C33.2 16.5 35 14.7 35 12.5 C35 10 31 4 31 4 Z" />
+                <path d="M44 -4 C44 -4 41 1 41 3 C41 4.7 42.3 6 44 6 C45.7 6 47 4.7 47 3 C47 1 44 -4 44 -4 Z" />
+                <path d="M57 5 C57 5 54 10 54 12 C54 13.7 55.3 15 57 15 C58.7 15 60 13.7 60 12 C60 10 57 5 57 5 Z" />
+              </g>
+
+              <!-- Growing Botanical Plant Group (overflow: visible allows upward growth) -->
+              <g id="davePlantGroup">
+                <!-- Stretchy Cactus Trunk + Milestone Branches -->
+                <g id="daveTrunkGroup">
+                  <!-- STAGE 2: Left Cactus Arm -->
+                  <g id="daveStage2Arm" class="dave-stage" style="transform-origin: 34px 48px;">
+                    <path d="M34 50 C22 50, 19 44, 19 36 C19 29, 27 29, 27 36 L27 42 L34 42 Z" fill="#4A7E59" stroke="#1B1714" stroke-width="1.5" stroke-linejoin="round" />
+                    <path d="M23 33 L23 44" stroke="#355E41" stroke-width="1" stroke-linecap="round" />
+                  </g>
+
+                  <!-- STAGE 3: Right Cactus Arm -->
+                  <g id="daveStage3Arm" class="dave-stage" style="transform-origin: 54px 44px;">
+                    <path d="M54 46 C66 46, 69 40, 69 31 C69 24, 61 24, 61 31 L61 38 L54 38 Z" fill="#4A7E59" stroke="#1B1714" stroke-width="1.5" stroke-linejoin="round" />
+                    <path d="M65 28 L65 40" stroke="#355E41" stroke-width="1" stroke-linecap="round" />
+                  </g>
+
+                  <!-- Base Cactus Trunk -->
+                  <rect x="33" y="28" width="22" height="39" rx="11" fill="#4E825D" stroke="#1B1714" stroke-width="1.5" />
+                  <line x1="40" y1="31" x2="40" y2="63" stroke="#376043" stroke-width="1.1" stroke-linecap="round" />
+                  <line x1="48" y1="31" x2="48" y2="63" stroke="#376043" stroke-width="1.1" stroke-linecap="round" />
+                  <!-- Tiny needles -->
+                  <path d="M33 38 L30 37 M33 48 L30 48 M55 37 L58 36 M55 47 L58 47" stroke="#1B1714" stroke-width="1" stroke-linecap="round" />
+
+                  <!-- STAGE 1: Fresh Lime Crown Shoot -->
+                  <g id="daveStage1" class="dave-stage" style="transform-origin: 44px 29px;">
+                    <path d="M44 29 C40 21, 35 19, 36 14 C40 16, 43 20, 44 26 Z" fill="#8CC654" stroke="#1B1714" stroke-width="1.2" stroke-linejoin="round" />
+                    <path d="M44 29 C48 20, 53 18, 52 13 C48 15, 45 20, 44 26 Z" fill="#77B545" stroke="#1B1714" stroke-width="1.2" stroke-linejoin="round" />
+                    <ellipse cx="44" cy="24" rx="4.2" ry="5.5" fill="#6AA84F" stroke="#1B1714" stroke-width="1.2" />
+                  </g>
+
+                  <!-- STAGE 3: First Coral-Terracotta Crown Flower -->
+                  <g id="daveStage3Flower" class="dave-stage" style="transform-origin: 44px 19px;">
+                    <circle cx="44" cy="14" r="4.6" fill="#C9593B" stroke="#1B1714" stroke-width="1" />
+                    <circle cx="38.5" cy="17.5" r="4.1" fill="#E07655" stroke="#1B1714" stroke-width="1" />
+                    <circle cx="49.5" cy="17.5" r="4.1" fill="#E07655" stroke="#1B1714" stroke-width="1" />
+                    <circle cx="44" cy="18.2" r="2.8" fill="#F2B418" />
+                  </g>
+
+                  <!-- STAGE 4: Marigold Flower on Left Arm -->
+                  <g id="daveStage4Flower" class="dave-stage" style="transform-origin: 23px 28px;">
+                    <circle cx="23" cy="24" r="3.8" fill="#F2B418" stroke="#1B1714" stroke-width="1" />
+                    <circle cx="18.8" cy="27" r="3.2" fill="#F7C948" stroke="#1B1714" stroke-width="0.9" />
+                    <circle cx="27.2" cy="27" r="3.2" fill="#F7C948" stroke="#1B1714" stroke-width="0.9" />
+                    <circle cx="23" cy="27.2" r="2.1" fill="#B85334" />
+                  </g>
+
+                  <!-- STAGE 5: Pink & Cream Desert Blossoms -->
+                  <g id="daveStage5Blossoms" class="dave-stage" style="transform-origin: 65px 24px;">
+                    <circle cx="65" cy="20" r="3.9" fill="#E87A90" stroke="#1B1714" stroke-width="1" />
+                    <circle cx="61" cy="23" r="3.2" fill="#F4A5B5" stroke="#1B1714" stroke-width="0.9" />
+                    <circle cx="69" cy="23" r="3.2" fill="#F4A5B5" stroke="#1B1714" stroke-width="0.9" />
+                    <circle cx="65" cy="23" r="2.1" fill="#FFF4DC" />
+                    <!-- Cream Blossom Accent -->
+                    <circle cx="52" cy="25" r="3.2" fill="#FFF4DC" stroke="#1B1714" stroke-width="0.9" />
+                    <circle cx="52" cy="25" r="1.3" fill="#F2B418" />
+                  </g>
+
+                  <!-- PROCEDURAL ENDLESS GROWTH CANOPY (Clicks 7, 8, 9, 10... unlimited!) -->
+                  <g id="daveProceduralCanopy"></g>
+                </g>
+
+                <!-- STAGE 2: Tender Green Side Leaves at Base -->
+                <g id="daveStage2Leaves" class="dave-stage" style="transform-origin: 44px 63px;">
+                  <path d="M34 64 C25 60, 21 54, 24 49 C29 52, 33 57, 35 63 Z" fill="#6AA84F" stroke="#1B1714" stroke-width="1.2" />
+                  <path d="M54 64 C63 60, 67 54, 64 49 C59 52, 55 57, 53 63 Z" fill="#6AA84F" stroke="#1B1714" stroke-width="1.2" />
+                </g>
+
+                <!-- STAGE 4: Extra Lush Botanical Base Leaves -->
+                <g id="daveStage4Leaves" class="dave-stage" style="transform-origin: 44px 64px;">
+                  <path d="M31 64 C18 65, 13 59, 16 53 C22 55, 28 59, 32 64 Z" fill="#3D6E4C" stroke="#1B1714" stroke-width="1.2" />
+                  <path d="M57 64 C70 65, 75 59, 72 53 C66 55, 60 59, 56 64 Z" fill="#3D6E4C" stroke="#1B1714" stroke-width="1.2" />
+                </g>
+
+                <!-- STAGE 6: Fluttering Yellow Butterfly & Golden Pollen Sparkles -->
+                <g id="daveStage6Canopy" class="dave-stage" style="transform-origin: 44px -10px;">
+                  <g class="dave-butterfly">
+                    <ellipse class="butterfly-wing-l" cx="59" cy="-27" rx="5.5" ry="3.8" fill="#F2B418" stroke="#1B1714" stroke-width="1" />
+                    <ellipse class="butterfly-wing-r" cx="69" cy="-27" rx="5.5" ry="3.8" fill="#F7C948" stroke="#1B1714" stroke-width="1" />
+                    <rect x="63.2" y="-30" width="1.6" height="6.5" rx="0.8" fill="#1B1714" />
+                  </g>
+                  <circle class="dave-sparkle" cx="22" cy="-14" r="2.2" fill="#F2B418" />
+                  <circle class="dave-sparkle" cx="68" cy="-8" r="1.8" fill="#F2B418" style="animation-delay:0.6s;" />
+                  <circle class="dave-sparkle" cx="44" cy="-28" r="2" fill="#B85334" style="animation-delay:1.1s;" />
+                </g>
+              </g>
+
+              <!-- Terracotta Pot -->
+              <path d="M24 67 L64 67 L59 94 L29 94 Z" fill="#B85334" stroke="#1B1714" stroke-width="1.5" stroke-linejoin="round" />
+              <rect x="20" y="61" width="48" height="8" rx="2" fill="#CE6443" stroke="#1B1714" stroke-width="1.5" />
+
+              <!-- STAGE 5: Trailing Botanical Vine Leaves Draped Over Pot Rim -->
+              <g id="daveStage5Vines" class="dave-stage" style="transform-origin: 32px 66px;">
+                <path d="M28 65 C22 72, 23 80, 27 86" stroke="#3D6E4C" stroke-width="1.5" fill="none" stroke-linecap="round" />
+                <ellipse cx="22" cy="74" rx="4.2" ry="2.4" transform="rotate(-24 22 74)" fill="#77B545" stroke="#1B1714" stroke-width="1" />
+                <ellipse cx="27" cy="81" rx="3.8" ry="2.2" transform="rotate(18 27 81)" fill="#5A9656" stroke="#1B1714" stroke-width="1" />
+                <path d="M60 65 C65 71, 64 78, 61 84" stroke="#3D6E4C" stroke-width="1.5" fill="none" stroke-linecap="round" />
+                <ellipse cx="64" cy="75" rx="4" ry="2.3" transform="rotate(24 64 75)" fill="#77B545" stroke="#1B1714" stroke-width="1" />
+              </g>
+            </svg>
+          </button>
+        </div>
+
+        <div class="shelf-plank" aria-hidden="true"></div>
+
+        <div class="shelf-labels">
+          <div class="shelf-label-slot" id="lbl-01"><span>01</span>LANDING PAGES</div>
+          <div class="shelf-label-slot" id="lbl-02"><span>02</span>EMAILS</div>
+          <div class="shelf-label-slot" id="lbl-03"><span>03</span>SaaS</div>
+          <div class="shelf-label-slot" id="lbl-dave"><span>*</span>DAVE</div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           SHELF 02 — MORE WORK
+           ==================================================================== -->
+      <div class="shelf-unit shelf-unit--2">
+        <div class="shelf-kicker">
+          <span class="shelf-kicker-text"><span>02 //</span> SELECTED ARCHIVE</span>
+        </div>
+
+        <div class="shelf-items">
+          <!-- 04. VIDEO (Vertical 9:16 Slate Phone Leaning Against Bookend) -->
+          <a
+            href="https://www.youtube.com/@DharmaSthanam/shorts"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj"
+            data-id="video-scripts"
+            data-label-slot="lbl-04"
+            data-name="Video Scripts"
+            data-instinct="human"
+            data-trait="retention hooks built to stop a fast thumb"
+            data-bubble="Scripts built to hijack scrolling thumbs in 1.8 seconds."
+            aria-label="Open Video Scripts on YouTube Shorts"
+          >
+            <span class="obj-tip">Watch Shorts &nearr;</span>
+            <svg width="76" height="94" viewBox="0 0 78 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M51 44 L65 44 L65 94 L42 94 L42 88 L58 88 L58 50 L51 50 Z" fill="#D89E3C" stroke="#1B1714" stroke-width="1.4" stroke-linejoin="round" />
+              <g transform="rotate(-7 34 54)">
+                <rect x="14" y="10" width="42" height="82" rx="7" fill="#1B1714" stroke="#0C0A09" stroke-width="1.5" />
+                <rect x="18" y="17" width="34" height="68" rx="3" fill="#2A2623" />
+                <rect x="29" y="13" width="12" height="2" rx="1" fill="#524D49" />
+                <circle cx="35" cy="50" r="11" fill="#F2B418" />
+                <polygon points="32,45 41,50 32,55" fill="#1B1714" />
+                <rect x="22" y="72" width="18" height="2.5" rx="1" fill="#FFFFFF" opacity="0.62" />
+                <rect x="22" y="77" width="12" height="2" rx="1" fill="#FFFFFF" opacity="0.35" />
+              </g>
+            </svg>
+          </a>
+
+          <!-- 05. WATCH ME (Retro Tactile Cassette / Brass Play Token) -->
+          <a
+            href="https://shivamscopywritingvideoresume.edgeone.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj tilt-right"
+            data-id="video-intro"
+            data-label-slot="lbl-05"
+            data-name="Watch Me"
+            data-instinct="human"
+            data-trait="checking the human behind the words first"
+            data-bubble="60 seconds proving I am not three prompts in a trench coat."
+            aria-label="Watch 60-second video introduction"
+          >
+            <span class="obj-tip">Watch 60s intro &nearr;</span>
+            <svg width="90" height="82" viewBox="0 0 92 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="22" width="80" height="58" rx="5" fill="#231E1B" stroke="#120F0D" stroke-width="1.6" />
+              <rect x="13" y="28" width="66" height="32" rx="2" fill="#FAF6EC" />
+              <rect x="13" y="28" width="66" height="8" rx="1" fill="#B85334" />
+              <text x="46" y="34" text-anchor="middle" fill="#FAF6EC" font-family="IBM Plex Mono, monospace" font-size="5.6" font-weight="600" letter-spacing="1.2">SIDE A // 60s INTRO</text>
+              <rect x="24" y="41" width="44" height="14" rx="7" fill="#1B1714" />
+              <circle cx="33" cy="48" r="5" fill="#F2B418" />
+              <circle cx="33" cy="48" r="2" fill="#1B1714" />
+              <circle cx="59" cy="48" r="5" fill="#F2B418" />
+              <circle cx="59" cy="48" r="2" fill="#1B1714" />
+              <rect x="40" y="45" width="12" height="6" fill="#3E2516" />
+              <path d="M22 80 L27 67 L65 67 L70 80 Z" fill="#161412" stroke="#3B3632" stroke-width="1" />
+              <circle cx="34" cy="74" r="2" fill="#FAF6EC" />
+              <circle cx="58" cy="74" r="2" fill="#FAF6EC" />
+            </svg>
+          </a>
+
+          <!-- 06. ADS (Polaroid Storyboard Strip) -->
+          <a
+            href="https://docs.google.com/presentation/d/1gBeLHJfSBs7zC0FCverlRM5O5lE6epJYvP_h-ivKuGY/edit?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj"
+            data-id="concept-ads"
+            data-label-slot="lbl-06"
+            data-name="Concept Ads"
+            data-instinct="craft"
+            data-trait="visual hooks that survive a sceptical creative director"
+            data-bubble="Spec campaigns I'd happily defend in a boardroom."
+            aria-label="Open Concept Ads presentation"
+          >
+            <span class="obj-tip">Open slide deck &nearr;</span>
+            <svg width="90" height="94" viewBox="0 0 92 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g transform="rotate(-10 46 54)">
+                <rect x="16" y="18" width="58" height="70" rx="2" fill="#F0EDE6" stroke="#1B1714" stroke-width="1.4" />
+                <rect x="21" y="23" width="48" height="44" fill="#D4CFC6" />
+              </g>
+              <g transform="rotate(8 46 54)">
+                <rect x="18" y="18" width="58" height="70" rx="2" fill="#F7F5F0" stroke="#1B1714" stroke-width="1.4" />
+                <rect x="23" y="23" width="48" height="44" fill="#292522" />
+              </g>
+              <g transform="rotate(-2 46 54)">
+                <rect x="17" y="20" width="58" height="70" rx="2" fill="#FFFFFF" stroke="#1B1714" stroke-width="1.6" />
+                <rect x="22" y="25" width="48" height="44" fill="#1C1917" />
+                <circle cx="46" cy="47" r="11" fill="#F2B418" />
+                <circle cx="51" cy="44" r="5" fill="#B85334" />
+                <text x="46" y="83" text-anchor="middle" fill="#B85334" font-family="IBM Plex Mono, monospace" font-size="8.2" font-weight="600" letter-spacing="1.4">SIZZLE</text>
+              </g>
+              <path d="M55 12 C55 8, 63 8, 63 13 L63 32 C63 36, 57 36, 57 32 L57 16" stroke="#8C8984" stroke-width="2.2" stroke-linecap="round" fill="none" />
+            </svg>
+          </a>
+
+          <!-- 07. CASES (Clipped Manila Dossier Stamped NDA) -->
+          <a
+            href="https://drive.google.com/drive/folders/1Vh911kTUMSOdbFkJ0OuqR2wKwRIAIOp5?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj tilt-right"
+            data-id="case-studies"
+            data-label-slot="lbl-07"
+            data-name="Case Studies"
+            data-instinct="proof"
+            data-trait="proof and outcomes before style"
+            data-bubble="8+ years behind NDAs. Here's what made it out alive."
+            aria-label="Open Case Studies folder"
+          >
+            <span class="obj-tip">Open Drive folder &nearr;</span>
+            <svg width="94" height="88" viewBox="0 0 96 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 18 C10 15 12 13 15 13 L38 13 L44 21 L84 21 C86 21 88 23 88 25 L88 86 L10 86 Z" fill="#C9A875" stroke="#1B1714" stroke-width="1.5" />
+              <rect x="18" y="16" width="60" height="50" fill="#FFFFFF" stroke="#1B1714" stroke-width="1.2" transform="rotate(-2 48 40)" />
+              <line x1="25" y1="24" x2="58" y2="24" stroke="#B4B1AA" stroke-width="2" />
+              <rect x="8" y="29" width="80" height="58" rx="2" fill="#E0C190" stroke="#1B1714" stroke-width="1.6" />
+              <g transform="rotate(-6 48 58)">
+                <rect x="26" y="48" width="44" height="19" rx="2" stroke="#B85334" stroke-width="1.6" fill="rgba(184,83,52,0.09)" />
+                <text x="48" y="61" text-anchor="middle" fill="#B85334" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="600" letter-spacing="1.6">NDA</text>
+              </g>
+            </svg>
+          </a>
+
+          <!-- 08. HEALTH (Vintage Clinical Apothecary Notebook) -->
+          <a
+            href="https://drive.google.com/drive/folders/1Ti7CZ3ZptJVIHzt_PQbNZDo3Z447gh9s?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shelf-obj"
+            data-id="healthcare"
+            data-label-slot="lbl-08"
+            data-name="Healthcare"
+            data-instinct="craft"
+            data-trait="clinical precision that still reads like a human wrote it"
+            data-bubble="Clinical writing that won't put a cardiologist to sleep."
+            aria-label="Open Healthcare Articles folder"
+          >
+            <span class="obj-tip">Open Drive folder &nearr;</span>
+            <svg width="80" height="94" viewBox="0 0 82 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="15" y="12" width="52" height="80" rx="3" fill="#FAF5E8" stroke="#1B1714" stroke-width="1.6" />
+              <rect x="15" y="12" width="11" height="80" rx="2" fill="#3E2516" stroke="#1B1714" stroke-width="1.4" />
+              <line x1="60" y1="12" x2="60" y2="92" stroke="#1B1714" stroke-width="2" opacity="0.85" />
+              <rect x="33" y="30" width="20" height="20" rx="2" fill="#FFFFFF" stroke="#D8D0C0" stroke-width="1" />
+              <rect x="41.2" y="34" width="3.6" height="12" rx="0.6" fill="#B85334" />
+              <rect x="37" y="38.2" width="12" height="3.6" rx="0.6" fill="#B85334" />
+              <line x1="32" y1="62" x2="54" y2="62" stroke="#1B1714" stroke-width="1.4" />
+              <line x1="35" y1="68" x2="51" y2="68" stroke="#9A948A" stroke-width="1.2" />
+              <text x="43" y="81" text-anchor="middle" fill="#5C554F" font-family="IBM Plex Mono, monospace" font-size="6.4" letter-spacing="1.2">RX // NOTES</text>
+            </svg>
+          </a>
+        </div>
+
+        <div class="shelf-plank" aria-hidden="true"></div>
+
+        <div class="shelf-labels">
+          <div class="shelf-label-slot" id="lbl-04"><span>04</span>VIDEO</div>
+          <div class="shelf-label-slot" id="lbl-05"><span>05</span>WATCH ME</div>
+          <div class="shelf-label-slot" id="lbl-06"><span>06</span>ADS</div>
+          <div class="shelf-label-slot" id="lbl-07"><span>07</span>CASES</div>
+          <div class="shelf-label-slot" id="lbl-08"><span>08</span>HEALTH</div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           SHELF 03 — AUTHORITY COLLATERALS & THE SILENT MENTALIST PAYOFF
+           ==================================================================== -->
+      <div class="shelf-unit shelf-unit--3">
+        <div class="shelf-kicker">
+          <span class="shelf-kicker-text"><span>03 //</span> PROOF, RECEIPTS &amp; ONE TRICK</span>
+        </div>
+
+        <div class="shelf-items">
+          <!-- 09. RED-PEN (Manuscript Sheet with Red Pen) -->
+          <button
+            type="button"
+            class="shelf-obj"
+            data-id="red-pen"
+            data-label-slot="lbl-09"
+            data-name="Red-Pen Edits"
+            data-instinct="craft"
+            data-trait="watching bloated copy get cut in half live"
+            data-bubble="Corporate buzzwords meet a ruthless red marker."
+            data-action="modal-redpen"
+            aria-label="Open Red-Pen Before and After Edits"
+          >
+            <span class="obj-tip">Before &rarr; After surgery</span>
+            <svg width="92" height="94" viewBox="0 0 96 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g transform="rotate(-3 47 52)">
+                <rect x="14" y="10" width="66" height="84" rx="2" fill="#FCFBF7" stroke="#1B1714" stroke-width="1.6" />
+                <rect x="22" y="21" width="44" height="3.5" fill="#A09D96" />
+                <rect x="22" y="30" width="50" height="3.5" fill="#A09D96" />
+                <rect x="22" y="39" width="38" height="3.5" fill="#A09D96" />
+                <path d="M19 25 L69 21 M19 34 L73 30 M20 42 L61 39" stroke="#B85334" stroke-width="2.6" stroke-linecap="round" />
+                <path d="M22 57 Q44 53 68 58" stroke="#1B1714" stroke-width="2.2" stroke-linecap="round" />
+                <path d="M22 66 Q38 64 56 66" stroke="#1B1714" stroke-width="2.2" stroke-linecap="round" />
+                <text x="22" y="82" fill="#B85334" font-family="IBM Plex Mono, monospace" font-size="7.4" font-weight="600">CUT 60%.</text>
+              </g>
+              <g transform="rotate(24 77 62)">
+                <rect x="71" y="32" width="8" height="52" rx="2" fill="#B85334" stroke="#1B1714" stroke-width="1.3" />
+                <rect x="71" y="26" width="8" height="7" rx="1" fill="#1B1714" />
+              </g>
+            </svg>
+          </button>
+
+          <!-- 10. RECEIPTS (Draped Thermal Paper Receipt Over Shelf Edge) -->
+          <button
+            type="button"
+            class="shelf-obj obj-receipt"
+            data-id="receipts"
+            data-label-slot="lbl-10"
+            data-name="The Receipts"
+            data-instinct="proof"
+            data-trait="unredacted numbers behind the NDA wall"
+            data-bubble="The numbers survived legal review. The names did not."
+            data-action="modal-receipt"
+            aria-label="Open The Receipts"
+          >
+            <span class="obj-tip">Inspect the numbers</span>
+            <svg width="84" height="118" viewBox="0 0 86 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 14 L70 14 L70 116 L64 111 L58 116 L52 111 L46 116 L40 111 L34 116 L28 111 L22 116 L16 111 Z" fill="#FAF8F2" stroke="#1B1714" stroke-width="1.5" stroke-linejoin="round" />
+              <line x1="17" y1="84" x2="69" y2="84" stroke="rgba(27,23,20,0.14)" stroke-width="2" />
+              <text x="43" y="27" text-anchor="middle" fill="#1B1714" font-family="IBM Plex Mono, monospace" font-size="7.2" font-weight="600" letter-spacing="0.8">RECEIPTS</text>
+              <line x1="22" y1="32" x2="64" y2="32" stroke="#BDB8AC" stroke-width="1" stroke-dasharray="2 2" />
+              <text x="23" y="43" fill="#1B1714" font-family="IBM Plex Mono, monospace" font-size="7.5" font-weight="600">8+ YRS</text>
+              <rect x="22" y="48" width="42" height="6" fill="#1B1714" />
+              <text x="23" y="64" fill="#B85334" font-family="IBM Plex Mono, monospace" font-size="7.5" font-weight="600">3,000+</text>
+              <rect x="22" y="69" width="36" height="6" fill="#1B1714" />
+              <text x="23" y="96" fill="#1B1714" font-family="IBM Plex Mono, monospace" font-size="7.2" font-weight="600">+45% LIFT</text>
+              <rect x="22" y="100" width="40" height="5" fill="#1B1714" />
+            </svg>
+          </button>
+
+          <!-- 11. DO NOT OPEN (Wax-Sealed Archival Envelope) -->
+          <button
+            type="button"
+            class="shelf-obj obj-envelope"
+            id="envelopeObj"
+            data-id="do-not-open"
+            data-label-slot="lbl-11"
+            data-bubble="I literally wrote 'Do Not Open' on it. Respect the wax seal."
+            data-action="modal-envelope"
+            aria-label="Open the sealed Do Not Open envelope"
+          >
+            <span class="obj-tip">Seriously. Don't.</span>
+            <svg width="114" height="86" viewBox="0 0 118 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="14" width="106" height="68" rx="3" fill="#D8B685" stroke="#1B1714" stroke-width="1.6" />
+              <path d="M7 15 L59 51 L111 15" fill="#E3C496" stroke="#1B1714" stroke-width="1.5" stroke-linejoin="round" />
+              <path d="M7 81 L42 48 M111 81 L76 48" stroke="#1B1714" stroke-width="1.2" opacity="0.45" />
+              <text x="59" y="73" text-anchor="middle" fill="#8B2812" font-family="IBM Plex Mono, monospace" font-size="7.8" font-weight="600" letter-spacing="1.2">DO NOT OPEN</text>
+              <circle cx="59" cy="48" r="13.5" fill="#B83227" stroke="#6E1912" stroke-width="1.5" />
+              <circle cx="59" cy="48" r="9.8" stroke="rgba(255,244,230,0.45)" stroke-width="1" stroke-dasharray="2 2" />
+              <text x="59" y="52" text-anchor="middle" fill="#FAF6EC" font-family="Cormorant Garamond, Georgia, serif" font-size="12" font-weight="600">SP</text>
+            </svg>
+          </button>
+        </div>
+
+        <div class="shelf-plank" aria-hidden="true"></div>
+
+        <div class="shelf-labels">
+          <div class="shelf-label-slot" id="lbl-09"><span>09</span>RED-PEN</div>
+          <div class="shelf-label-slot" id="lbl-10"><span>10</span>RECEIPTS</div>
+          <div class="shelf-label-slot" id="lbl-11"><span>11</span>DO NOT OPEN</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         FOREGROUND: SEATED CUTOUT + ZOOM-LOCKED ALMOND TRACKING EYES (Z-INDEX 10)
+         ====================================================================== -->
+    <div class="cutout-anchor">
+      <div class="cutout-box" id="cutoutBox">
+        <!-- Real Transparent PNG Cutout (auto-fallback chain handled silently in JS) -->
+        <img
+          id="cutoutImg"
+          class="cutout-img"
+          alt="Shivam Prateek seated in a walnut-and-cane chair next to stacked books and a black coffee mug"
+        />
+
+        <!-- Silent Graceful Vector Outline Fallback (ONLY if PNG files are absent in sandbox) -->
+        <svg id="cutoutFallbackSvg" class="cutout-fallback-svg" viewBox="0 0 1000 1071" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M310 207 C355 205, 392 242, 390 301 C389 336, 376 370, 362 390 L492 426 C578 453, 638 541, 656 633 L683 658 L671 857 L725 1048 L683 1048 L628 929 L553 939 L541 1048 L505 1048 L510 941 L398 1034 L273 1034 L205 941 L153 943 L130 1048 L95 1048 L112 910 L130 690 L120 596 C112 533, 160 456, 221 406 L239 356 C233 272, 261 209, 310 207 Z" stroke="#F2B418" stroke-width="18" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- Side Table, Books & Black Coffee Mug -->
+          <rect x="6" y="730" width="150" height="23" rx="4" fill="#4E3120"/>
+          <path d="M37 753 L19 1015 L37 1015 L54 753 Z" fill="#3E2516"/>
+          <path d="M113 753 L138 996 L119 996 L96 753 Z" fill="#3E2516"/>
+          <path d="M77 753 L73 966 L88 966 L92 753 Z" fill="#2E1B10"/>
+          <rect x="14" y="707" width="134" height="23" rx="2" fill="#DDD7CC" stroke="#9B9387" stroke-width="2"/>
+          <rect x="20" y="685" width="124" height="22" rx="2" fill="#ECE8E0" stroke="#A69F93" stroke-width="2"/>
+          <path d="M40 626 C21 626, 20 670, 40 670" stroke="#1B1714" stroke-width="9" stroke-linecap="round"/>
+          <rect x="38" y="610" width="68" height="78" rx="10" fill="#1B1714"/>
+          <ellipse cx="72" cy="614" rx="32" ry="7" fill="#302C28"/>
+          <!-- Walnut & Cane Chair -->
+          <rect x="571" y="675" width="117" height="186" rx="6" fill="#C9A36B" stroke="#4D2F1E" stroke-width="14"/>
+          <path d="M584 696 L676 696 M584 727 L676 727 M584 759 L676 759 M584 790 L676 790 M584 822 L676 822 M603 684 L603 853 M632 684 L632 853 M661 684 L661 853" stroke="#8C6239" stroke-width="3" opacity="0.65"/>
+          <rect x="120" y="830" width="564" height="90" rx="24" fill="#23201E" stroke="#11100F" stroke-width="4"/>
+          <path d="M132 916 L674 916 L722 1050 L684 1050 L636 939 L176 939 L132 1050 L96 1050 Z" fill="#4D2F1E"/>
+          <rect x="117" y="657" width="590" height="23" rx="6" fill="#5D3B26"/>
+          <!-- Seated Silhouette -->
+          <path d="M247 414 C303 406, 382 408, 477 429 C567 450, 636 537, 650 636 L582 646 C565 571, 538 546, 510 556 L491 707 L209 698 L186 542 Z" fill="#1B1714"/>
+          <path d="M209 650 C276 588, 454 676, 550 767 L490 832 C395 763, 272 759, 209 742 Z" fill="#282527"/>
+          <path d="M188 688 L293 1042 L414 1042 L452 799 L230 749 Z" fill="#201E20"/>
+          <path d="M487 809 C517 770, 567 765, 605 797 L640 868 C646 891, 621 910, 592 904 L500 862 Z" fill="#F4F2EE" stroke="#CBC7C0" stroke-width="3"/>
+          <path d="M533 640 C563 646, 590 678, 588 730 L531 744 C517 707, 510 669, 533 640 Z" fill="#E3C1AC"/>
+          <rect x="548" y="623" width="54" height="23" rx="6" fill="#5A3D2B"/>
+          <!-- Head aligned precisely to exact eye % coordinates -->
+          <rect x="292" y="360" width="72" height="70" rx="22" fill="#D5AF98"/>
+          <ellipse cx="310" cy="313" rx="70" ry="84" transform="rotate(-4 310 313)" fill="#E6C7B4"/>
+          <path d="M236 307 C228 247, 259 207, 314 207 C366 207, 391 245, 383 303 C366 263, 348 249, 304 253 C269 256, 248 276, 236 307 Z" fill="#1C1A19"/>
+          <path d="M261 297 Q284 289 302 296" stroke="#241C18" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M320 289 Q340 280 359 287" stroke="#241C18" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M308 312 L310 342 Q314 350 323 347" stroke="#B68B73" stroke-width="4" stroke-linecap="round"/>
+          <path d="M286 363 Q316 351 345 359 C337 376, 296 378, 286 363 Z" fill="#27211F"/>
+          <path d="M296 368 Q316 378 336 367" stroke="#F7F1EB" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M264 363 C279 405, 350 407, 366 361 C358 392, 337 403, 314 403 C292 403, 274 392, 264 363 Z" fill="#2A2422" opacity="0.72"/>
+          <path d="M188 542 L234 374 C247 362, 268 368, 274 385 L243 542 Z" fill="#1B1714"/>
+          <path d="M232 383 C238 362, 266 360, 278 374 C284 383, 276 406, 259 412 L234 408 Z" fill="#E3C1AC"/>
+        </svg>
+
+        <!-- ZOOM/RESIZE-PROOF ALMOND EYES LAYER -->
+        <div class="eyes-layer" aria-hidden="true">
+          <!-- Viewer's Left Eye -->
+          <div class="eye-anchor eye-anchor--left" id="eyeAnchorL">
+            <div class="eye-socket" id="eyeSocketL">
+              <div class="eye-iris" id="eyeIrisL">
+                <div class="eye-pupil-core"></div>
+                <div class="eye-catchlight"></div>
+                <div class="eye-catchlight-mini"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Viewer's Right Eye -->
+          <div class="eye-anchor eye-anchor--right" id="eyeAnchorR">
+            <div class="eye-socket" id="eyeSocketR">
+              <div class="eye-iris" id="eyeIrisR">
+                <div class="eye-pupil-core"></div>
+                <div class="eye-catchlight"></div>
+                <div class="eye-catchlight-mini"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Targeted Interactive Hotspots ONLY over Face & Black Coffee Mug -->
+        <button type="button" class="hotspot hotspot--face" id="hotspotFace" aria-label="Tap Shivam's face"></button>
+        <button type="button" class="hotspot hotspot--mug" id="hotspotMug" aria-label="Tap the black coffee mug"></button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================
+       3. MODAL 01 — LANDING PAGES (ALL 3 LIVE PAGES + FULL INDEX)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="modalLanding" role="dialog" aria-modal="true" aria-labelledby="titleLanding">
+    <div class="modal-card">
+      <div class="modal-top">
+        <span class="modal-kicker">SHELF 01 // 01 LANDING PAGES</span>
+        <button type="button" class="modal-close" data-close-modal>ESC</button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-heading" id="titleLanding">Live conversion pages.</h2>
+
+        <div class="lp-list">
+          <a href="https://shivamswaraas.github.io/NorthPeak-Daily-Sync-Landing-Pages/" target="_blank" rel="noopener noreferrer" class="lp-item">
+            <div>
+              <span class="lp-name">NorthPeak</span>
+              <span class="lp-sub">Kill the Status Meeting &mdash; Async SaaS</span>
+            </div>
+            <span class="lp-arrow">Open &nearr;</span>
+          </a>
+
+          <a href="https://shivamswaraas.github.io/AbekusLandingPageEmployerTargeted/" target="_blank" rel="noopener noreferrer" class="lp-item">
+            <div>
+              <span class="lp-name">Abekus B2B Employer Engine</span>
+              <span class="lp-sub">The Truth Engine &mdash; Recruiter Funnel</span>
+            </div>
+            <span class="lp-arrow">Open &nearr;</span>
+          </a>
+
+          <a href="https://shivamswaraas.github.io/AbekusAiAnalyserLandingPage/" target="_blank" rel="noopener noreferrer" class="lp-item">
+            <div>
+              <span class="lp-name">Abekus B2C Resume Analyser</span>
+              <span class="lp-sub">Hacking the Algorithm &mdash; Candidate Funnel</span>
+            </div>
+            <span class="lp-arrow">Open &nearr;</span>
+          </a>
+        </div>
+
+        <a href="https://shivamswaraas.github.io/LandingPagesExamples/" target="_blank" rel="noopener noreferrer" class="lp-hub-link">
+          Full Landing Page Index &nearr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       4. MODAL 02 — RED-PEN EDITS (3 TABBED BEFORE -> AFTER SURGERY CARDS)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="modalRedPen" role="dialog" aria-modal="true" aria-labelledby="titleRedPen">
+    <div class="modal-card">
+      <div class="modal-top">
+        <span class="modal-kicker">SHELF 03 // 09 RED-PEN EDITS</span>
+        <button type="button" class="modal-close" data-close-modal>ESC</button>
+      </div>
+      <div class="modal-body">
+        <h2 class="modal-heading" id="titleRedPen">Before it sounded like everyone else.</h2>
+
+        <div class="rp-tabs" role="tablist">
+          <button type="button" class="rp-tab active" data-rp="saas" role="tab">SaaS Hero</button>
+          <button type="button" class="rp-tab" data-rp="landing" role="tab">Landing Page</button>
+          <button type="button" class="rp-tab" data-rp="email" role="tab">Cold Email</button>
+        </div>
+
+        <div class="manuscript-box">
+          <span class="ms-label">BEFORE // CORPORATE WALLPAPER</span>
+          <p class="before-copy"><span class="red-slash" id="rpBefore"></span></p>
+
+          <div class="after-block">
+            <span class="ms-label" style="color:var(--terracotta);">AFTER // RED-PENNED</span>
+            <p class="after-copy" id="rpAfter"></p>
+            <p class="margin-note" id="rpNote"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       5. MODAL 03 — THE RECEIPTS (OUTCOMES + CLICKABLE NDA REDACTIONS)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="modalReceipt" role="dialog" aria-modal="true" aria-labelledby="titleReceipt">
+    <div class="modal-card receipt-card">
+      <div class="modal-top">
+        <span class="modal-kicker">SHELF 03 // 10 THE RECEIPTS</span>
+        <button type="button" class="modal-close" data-close-modal>ESC</button>
+      </div>
+      <div class="modal-body">
+        <div class="receipt-head">
+          <h3 id="titleReceipt">SHIVAM PRATEEK // RECEIPTS</h3>
+          <p>UNREDACTED NUMBERS ONLY &middot; LEGAL KEPT THE REST</p>
+        </div>
+
+        <ul class="receipt-metrics">
+          <li><span class="receipt-val">+45%</span><span class="receipt-key">ORGANIC LIFT</span></li>
+          <li><span class="receipt-val">3,000+</span><span class="receipt-key">PIECES SHIPPED</span></li>
+          <li><span class="receipt-val">40+</span><span class="receipt-key">BRANDS</span></li>
+          <li><span class="receipt-val">8+ YRS</span><span class="receipt-key">BEHIND NDAs</span></li>
+        </ul>
+
+        <span class="redact-hint">Redacted lines (tap to test clearance):</span>
+        <div class="redact-list">
+          <button type="button" class="redact-bar">Nice try. Legal says no.</button>
+          <button type="button" class="redact-bar">Client bought a boat. That's all I can say.</button>
+          <button type="button" class="redact-bar">Retainer fee: enough to keep the cold brew flowing.</button>
+          <button type="button" class="redact-bar">Toughest critic on file: Dave the cactus. Unimpressed since 2024.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       6. MODAL 04 — SILENT MENTALIST PREDICTION ("11 DO NOT OPEN")
+       ======================================================================== -->
+  <div class="modal-backdrop" id="modalEnvelope" role="dialog" aria-modal="true" aria-labelledby="titleEnvelope">
+    <div class="modal-card envelope-card">
+      <div class="modal-top" style="background:#F3ECE0;">
+        <span class="modal-kicker">SHELF 03 // 11 SEAL BROKEN</span>
+        <button type="button" class="modal-close" data-close-modal>ESC</button>
+      </div>
+      <div class="modal-body">
+        <div class="wax-header">
+          <div class="wax-seal-badge" aria-hidden="true">SP</div>
+          <div>
+            <div class="env-meta-stamp" id="envStamp">UNSEALED</div>
+            <div style="font-family:var(--font-mono); font-size:0.64rem; color:var(--muted);" id="titleEnvelope">WRITTEN BEFORE YOU ARRIVED</div>
+          </div>
+        </div>
+
+        <div class="env-read-lines" id="envReadLines"></div>
+        <p class="env-ps" id="envExtraPS"></p>
+
+        <div class="env-actions">
+          <a href="mailto:ShivamSwaraas@Gmail.com" class="btn-write" id="envMailBtn">Write to Shivam &rarr;</a>
+          <button type="button" class="env-util-btn" id="envCopyEmail">Copy Email</button>
+          <button type="button" class="env-util-btn" id="envResetRead">Reset Observation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       7. INTERACTIVE ENGINE (EYES, DAVE GROWTH, MENTALIST, MODALS)
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------------------
+         A. CUTOUT IMAGE SILENT FALLBACK CHAIN & RATIO LOCK
+         ---------------------------------------------------------------------- */
+      const cutoutImg = document.getElementById('cutoutImg');
+      const cutoutFallbackSvg = document.getElementById('cutoutFallbackSvg');
+
+      const IMAGE_CHAIN = [
+        './Seated%20Man%20Sticker%20Cutout_2.png',
+        './Seated%20Man%20Sticker%20Cutout.png',
+        './shivam-cutout.png'
+      ];
+
+      let imgTryIndex = 0;
+
+      function tryLoadCutout() {
+        if (imgTryIndex < IMAGE_CHAIN.length) {
+          cutoutImg.src = IMAGE_CHAIN[imgTryIndex];
+          imgTryIndex += 1;
+        } else {
+          // Graceful vector outline fallback if previewed outside GitHub repo
+          cutoutImg.style.display = 'none';
+          cutoutFallbackSvg.style.display = 'block';
+          document.documentElement.style.setProperty('--img-ratio', (1000 / 1071).toFixed(4));
+        }
+      }
+
+      cutoutImg.addEventListener('load', () => {
+        if (cutoutImg.naturalWidth && cutoutImg.naturalHeight) {
+          const ratio = cutoutImg.naturalWidth / cutoutImg.naturalHeight;
+          document.documentElement.style.setProperty('--img-ratio', ratio.toFixed(4));
+        }
+        cutoutImg.style.display = 'block';
+        cutoutFallbackSvg.style.display = 'none';
+      });
+
+      cutoutImg.addEventListener('error', tryLoadCutout);
+      tryLoadCutout();
+
+      /* ----------------------------------------------------------------------
+         B. ZOOM/RESIZE-PROOF ALMOND EYE TRACKING ENGINE
+            - Pupil travel strictly proportional to live getBoundingClientRect()
+            - Cross-eyed proximity gag near nose bridge
+            - Natural periodic blinking + occasional witty double-blink
+            - Touch tracking, scroll-glance & subtle idle glances
+         ---------------------------------------------------------------------- */
+      const eyeSocketL = document.getElementById('eyeSocketL');
+      const eyeSocketR = document.getElementById('eyeSocketR');
+      const eyeIrisL = document.getElementById('eyeIrisL');
+      const eyeIrisR = document.getElementById('eyeIrisR');
+
+      const eyeState = {
+        mode: 'pointer',         // 'pointer' | 'scroll' | 'idle'
+        ptrX: window.innerWidth * 0.68,
+        ptrY: window.innerHeight * 0.44,
+        hasPointer: false,
+        lastActive: Date.now(),
+        // Normalized target offsets (-1..1) for scroll & idle modes
+        scrollNormX: 0,
+        scrollNormY: 0,
+        idleNormX: 0,
+        idleNormY: 0,
+        // Current smoothed pixel offsets for each iris
+        curLx: 0, curLy: 0,
+        curRx: 0, curRy: 0,
+        wasCrossEyed: false
+      };
+
+      function updatePointer(x, y) {
+        eyeState.ptrX = x;
+        eyeState.ptrY = y;
+        eyeState.hasPointer = true;
+        eyeState.mode = 'pointer';
+        eyeState.lastActive = Date.now();
+      }
+
+      window.addEventListener('mousemove', (e) => updatePointer(e.clientX, e.clientY), { passive: true });
+      window.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+
+      // Subtle downward glance when scrolling
+      let prevScrollY = window.scrollY;
+      let scrollTimer = null;
+
+      window.addEventListener('scroll', () => {
+        const dy = window.scrollY - prevScrollY;
+        prevScrollY = window.scrollY;
+        if (Math.abs(dy) < 2) return;
+
+        eyeState.mode = 'scroll';
+        eyeState.lastActive = Date.now();
+        eyeState.scrollNormY = dy > 0 ? 0.85 : -0.45;
+        eyeState.scrollNormX = 0.35;
+
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+          if (eyeState.mode === 'scroll') {
+            eyeState.mode = eyeState.hasPointer ? 'pointer' : 'idle';
+          }
+        }, 950);
+      }, { passive: true });
+
+      // Natural blinking (3.2s - 6s) + occasional witty double-blink
+      function triggerBlink(doubleBlink) {
+        eyeSocketL.classList.add('is-blinking');
+        eyeSocketR.classList.add('is-blinking');
+        setTimeout(() => {
+          eyeSocketL.classList.remove('is-blinking');
+          eyeSocketR.classList.remove('is-blinking');
+          if (doubleBlink) {
+            setTimeout(() => {
+              eyeSocketL.classList.add('is-blinking');
+              eyeSocketR.classList.add('is-blinking');
+              setTimeout(() => {
+                eyeSocketL.classList.remove('is-blinking');
+                eyeSocketR.classList.remove('is-blinking');
+              }, 115);
+            }, 135);
+          }
+        }, 125);
+      }
+
+      function scheduleBlink() {
+        const wait = 3200 + Math.random() * 2800;
+        setTimeout(() => {
+          triggerBlink(Math.random() < 0.22);
+          scheduleBlink();
+        }, wait);
+      }
+      scheduleBlink();
+
+      // Occasional subtle idle glances when untouched
+      setInterval(() => {
+        if (Date.now() - eyeState.lastActive > 4800) {
+          eyeState.mode = 'idle';
+          const looks = [
+            { x: 0.72, y: -0.25 }, // Glance up-right toward shelves
+            { x: 0.65, y: 0.35 },  // Glance toward Shelf 03
+            { x: -0.5, y: 0.55 },  // Glance toward coffee mug
+            { x: 0, y: 0 }         // Back at visitor
+          ];
+          const chosen = looks[Math.floor(Math.random() * looks.length)];
+          eyeState.idleNormX = chosen.x;
+          eyeState.idleNormY = chosen.y;
+        }
+      }, 2600);
+
+      function animateEyes() {
+        const rectL = eyeSocketL.getBoundingClientRect();
+        const rectR = eyeSocketR.getBoundingClientRect();
+
+        if (rectL.width > 0 && rectR.width > 0) {
+          // Proportional travel calculated live from each eye's rendered rect (100% zoom/device proof)
+          const maxLX = rectL.width * 0.27;
+          const maxLY = rectL.height * 0.20;
+          const maxRX = rectR.width * 0.27;
+          const maxRY = rectR.height * 0.20;
+
+          let targetLx = 0, targetLy = 0;
+          let targetRx = 0, targetRy = 0;
+          let crossEyedNow = false;
+
+          if (eyeState.mode === 'scroll') {
+            targetLx = maxLX * eyeState.scrollNormX;
+            targetLy = maxLY * eyeState.scrollNormY;
+            targetRx = maxRX * eyeState.scrollNormX;
+            targetRy = maxRY * eyeState.scrollNormY;
+          } else if (eyeState.mode === 'idle' || !eyeState.hasPointer) {
+            targetLx = maxLX * eyeState.idleNormX;
+            targetLy = maxLY * eyeState.idleNormY;
+            targetRx = maxRX * eyeState.idleNormX;
+            targetRy = maxRY * eyeState.idleNormY;
+          } else {
+            const cxL = rectL.left + rectL.width * 0.5;
+            const cyL = rectL.top + rectL.height * 0.5;
+            const cxR = rectR.left + rectR.width * 0.5;
+            const cyR = rectR.top + rectR.height * 0.5;
+
+            // Nose bridge midpoint & zoom-proportional proximity threshold
+            const eyeGap = Math.hypot(cxR - cxL, cyR - cyL);
+            const noseX = (cxL + cxR) * 0.5;
+            const noseY = (cyL + cyR) * 0.5 + eyeGap * 0.32;
+            const distNose = Math.hypot(eyeState.ptrX - noseX, eyeState.ptrY - noseY);
+            const crossRadius = Math.max(26, eyeGap * 1.45);
+
+            if (distNose < crossRadius) {
+              // Funny cross-eyed gag when cursor hovers near bridge of nose
+              crossEyedNow = true;
+              const pull = 0.8 + 0.2 * (1 - distNose / crossRadius);
+              targetLx = maxLX * pull;
+              targetRx = -maxRX * pull;
+              targetLy = maxLY * 0.35;
+              targetRy = maxRY * 0.35;
+            } else {
+              // Independent smooth vectors for each eye
+              const dxL = eyeState.ptrX - cxL;
+              const dyL = eyeState.ptrY - cyL;
+              const distL = Math.hypot(dxL, dyL);
+              const magL = Math.min(1, distL / Math.max(90, rectL.width * 6.5));
+              const angL = Math.atan2(dyL, dxL);
+              targetLx = Math.cos(angL) * maxLX * magL;
+              targetLy = Math.sin(angL) * maxLY * magL;
+
+              const dxR = eyeState.ptrX - cxR;
+              const dyR = eyeState.ptrY - cyR;
+              const distR = Math.hypot(dxR, dyR);
+              const magR = Math.min(1, distR / Math.max(90, rectR.width * 6.5));
+              const angR = Math.atan2(dyR, dxR);
+              targetRx = Math.cos(angR) * maxRX * magR;
+              targetRy = Math.sin(angR) * maxRY * magR;
+            }
+          }
+
+          if (crossEyedNow && !eyeState.wasCrossEyed) {
+            setBubble('Personal space, please.', true);
+          } else if (!crossEyedNow && eyeState.wasCrossEyed) {
+            revertBubble();
+          }
+          eyeState.wasCrossEyed = crossEyedNow;
+
+          // Smooth damped spring interpolation at 60fps
+          const damp = 0.21;
+          eyeState.curLx += (targetLx - eyeState.curLx) * damp;
+          eyeState.curLy += (targetLy - eyeState.curLy) * damp;
+          eyeState.curRx += (targetRx - eyeState.curRx) * damp;
+          eyeState.curRy += (targetRy - eyeState.curRy) * damp;
+
+          eyeIrisL.style.transform = `translate(calc(-50% + ${eyeState.curLx.toFixed(2)}px), calc(-50% + ${eyeState.curLy.toFixed(2)}px))`;
+          eyeIrisR.style.transform = `translate(calc(-50% + ${eyeState.curRx.toFixed(2)}px), calc(-50% + ${eyeState.curRy.toFixed(2)}px))`;
+        }
+
+        requestAnimationFrame(animateEyes);
+      }
+
+      requestAnimationFrame(animateEyes);
+
+      /* ----------------------------------------------------------------------
+         C. DEADPAN SPEECH BUBBLE & SILENT MENTALIST TRACKER
+         ---------------------------------------------------------------------- */
+      const speechBubble = document.getElementById('speechBubble');
+      const speechText = document.getElementById('speechText');
+      const DEFAULT_BUBBLE = "Go ahead. Touch anything on the shelves. I'm definitely not judging.";
+
+      const session = {
+        startTime: Date.now(),
+        firstItem: null,             // { id, name, instinct, trait }
+        firstActionSec: null,
+        hoveredIds: new Set(),
+        inspectedIds: new Set(),
+        clickedAnyWork: false,
+        openedEnvelopeFirst: false,
+        daveFirst: false,
+        daveWaterCount: 0,
+        pokedFace: false,
+        clickedMug: false
+      };
+
+      let revertTimer = null;
+
+      function setBubble(text, pop) {
+        if (speechText.textContent !== text) {
+          speechText.textContent = text;
+          speechBubble.classList.remove('pop');
+          void speechBubble.offsetWidth;
+          if (pop) speechBubble.classList.add('pop');
+        }
+        clearTimeout(revertTimer);
+      }
+
+      function revertBubble() {
+        clearTimeout(revertTimer);
+        revertTimer = setTimeout(() => {
+          if (!session.clickedAnyWork && session.hoveredIds.size >= 4) {
+            setBubble('Window shopping? Click NorthPeak. You know you want to.', true);
+          } else {
+            speechBubble.classList.remove('pop');
+            speechText.textContent = DEFAULT_BUBBLE;
+          }
+        }, 1600);
+      }
+
+      // Face & Black Coffee Mug Hotspots
+      const hotspotFace = document.getElementById('hotspotFace');
+      const hotspotMug = document.getElementById('hotspotMug');
+
+      const faceLines = [
+        "Yes, the eyes follow you. No, it's not AI. Mostly.",
+        'You just poked a copywriter in the face. Bold opener.',
+        'Still real. Still watching.'
+      ];
+      let faceClicks = 0;
+
+      hotspotFace.addEventListener('click', () => {
+        session.pokedFace = true;
+        triggerBlink(true);
+        setBubble(faceLines[faceClicks % faceLines.length], true);
+        faceClicks += 1;
+        revertBubble();
+      });
+
+      const mugLines = [
+        'Black coffee. Zero sugar. Like my copy.',
+        'Hands off the caffeine.',
+        'Cold brew fuel. Touch the shelves instead.'
+      ];
+      let mugClicks = 0;
+
+      hotspotMug.addEventListener('mouseenter', () => {
+        setBubble(mugLines[mugClicks % mugLines.length], true);
+      });
+      hotspotMug.addEventListener('mouseleave', revertBubble);
+      hotspotMug.addEventListener('click', () => {
+        session.clickedMug = true;
+        mugClicks += 1;
+        triggerBlink(false);
+        setBubble(mugLines[mugClicks % mugLines.length], true);
+        revertBubble();
+      });
+
+      // Shelf Object Hover & Click Wiring
+      const shelfObjects = document.querySelectorAll('.shelf-obj');
+      const hoverTimers = new Map();
+
+      shelfObjects.forEach((obj) => {
+        const id = obj.getAttribute('data-id');
+        const labelSlotId = obj.getAttribute('data-label-slot');
+        const labelSlot = labelSlotId ? document.getElementById(labelSlotId) : null;
+        const name = obj.getAttribute('data-name');
+        const instinct = obj.getAttribute('data-instinct');
+        const trait = obj.getAttribute('data-trait');
+        const bubbleCopy = obj.getAttribute('data-bubble');
+        const isWorkItem = Boolean(name && id !== 'dave' && id !== 'do-not-open');
+
+        obj.addEventListener('mouseenter', () => {
+          if (labelSlot) labelSlot.classList.add('is-active');
+
+          if (isWorkItem) {
+            session.hoveredIds.add(id);
+            session.inspectedIds.add(id);
+
+            const t = setTimeout(() => {
+              if (!session.firstItem) {
+                session.firstItem = { id, name, instinct, trait };
+              }
+            }, 450);
+            hoverTimers.set(obj, t);
+          }
+
+          if (!session.clickedAnyWork && session.hoveredIds.size >= 4 && id !== 'dave' && id !== 'do-not-open') {
+            setBubble('Window shopping? Click NorthPeak. You know you want to.', true);
+          } else if (bubbleCopy) {
+            setBubble(bubbleCopy, true);
+          }
+        });
+
+        obj.addEventListener('mouseleave', () => {
+          if (labelSlot) labelSlot.classList.remove('is-active');
+          const t = hoverTimers.get(obj);
+          if (t) clearTimeout(t);
+          revertBubble();
+        });
+
+        obj.addEventListener('click', () => {
+          if (session.firstActionSec === null) {
+            session.firstActionSec = Math.max(1, Math.round((Date.now() - session.startTime) / 1000));
+          }
+
+          if (isWorkItem) {
+            session.clickedAnyWork = true;
+            session.inspectedIds.add(id);
+            if (!session.firstItem) {
+              session.firstItem = { id, name, instinct, trait };
+            }
+          }
+
+          const action = obj.getAttribute('data-action');
+          if (action === 'modal-landing') openModal('modalLanding');
+          if (action === 'modal-redpen') {
+            renderRedPen('saas');
+            openModal('modalRedPen');
+          }
+          if (action === 'modal-receipt') openModal('modalReceipt');
+          if (action === 'modal-envelope') {
+            if (!session.clickedAnyWork && !session.firstItem && session.daveWaterCount === 0) {
+              session.openedEnvelopeFirst = true;
+            }
+            openMentalistEnvelope();
+          }
+        });
+      });
+
+      /* ----------------------------------------------------------------------
+         D. DAVE THE CACTUS — PROGRESSIVE ENDLESS BOTANICAL GROWTH
+         ---------------------------------------------------------------------- */
+      const daveCactus = document.getElementById('daveCactus');
+      const daveTip = document.getElementById('daveTip');
+      const daveWaterBadge = document.getElementById('daveWaterBadge');
+      const daveTrunkGroup = document.getElementById('daveTrunkGroup');
+      const daveProceduralCanopy = document.getElementById('daveProceduralCanopy');
+
+      const daveStages = {
+        s1: document.getElementById('daveStage1'),
+        s2Arm: document.getElementById('daveStage2Arm'),
+        s2Leaves: document.getElementById('daveStage2Leaves'),
+        s3Arm: document.getElementById('daveStage3Arm'),
+        s3Flower: document.getElementById('daveStage3Flower'),
+        s4Leaves: document.getElementById('daveStage4Leaves'),
+        s4Flower: document.getElementById('daveStage4Flower'),
+        s5Blossoms: document.getElementById('daveStage5Blossoms'),
+        s5Vines: document.getElementById('daveStage5Vines'),
+        s6Canopy: document.getElementById('daveStage6Canopy')
+      };
+
+      const daveQuips = [
+        'Dave just grew a crown shoot. He likes you already.',
+        'Left arm and fresh leaves. Dave is outperforming most agencies.',
+        'First blossom. Honestly, I didn’t think he had it in him.',
+        'Marigolds and extra foliage. Dave is visibly showing off now.',
+        'Trailing vines over the terracotta rim. You have a botanical gift.',
+        'A butterfly just moved in. Dave has better retention than most SaaS apps.',
+        'Watering #7. Dave just asked about equity in this portfolio.',
+        'Watering #8. Dave is drafting a LinkedIn newsletter on "Scaling Roots."',
+        'Watering #9. He just hired an unpaid intern to mist his left arm.',
+        'Watering #10. Legally, Shelf 01 is now a federally recognized biome.',
+        'Watering #11. Dave is negotiating a retainer. Do not encourage him.',
+        'Watering #12. The ceiling called. It wants a word with Dave.',
+        'Watering #13. You have watered a cactus more than you looked at my portfolio.'
+      ];
+
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+      const flowerColors = ['#B85334', '#F2B418', '#E87A90', '#FFF4DC', '#A78BFA'];
+      const leafColors = ['#4E825D', '#6AA84F', '#8CC654', '#3D6E4C'];
+
+      function createSvgEl(tag, attrs) {
+        const el = document.createElementNS(SVG_NS, tag);
+        Object.keys(attrs).forEach((k) => el.setAttribute(k, attrs[k]));
+        return el;
+      }
+
+      // Procedurally appends NEW leaves, buds, multi-petal flowers or extra butterflies on click 7+
+      function appendProceduralGrowth(count) {
+        const step = count - 6; // 1, 2, 3...
+        const angle = (step * 137.5) * (Math.PI / 180); // Golden-angle phyllotaxis spread
+        const radiusX = Math.min(32, 10 + (step % 5) * 5.2);
+        const cx = 44 + Math.cos(angle) * radiusX;
+        const cy = Math.max(-34, 22 - Math.min(48, step * 3.1) + Math.sin(angle) * 6);
+
+        const g = createSvgEl('g', {
+          class: 'proc-node',
+          style: `transform-origin: ${cx.toFixed(1)}px ${cy.toFixed(1)}px;`
+        });
+
+        const mode = step % 4;
+
+        if (mode === 1) {
+          // Multi-petal desert blossom
+          const col = flowerColors[step % flowerColors.length];
+          const centerCol = col === '#F2B418' ? '#B85334' : '#F2B418';
+          for (let p = 0; p < 5; p++) {
+            const pa = (p * 72) * (Math.PI / 180);
+            g.appendChild(createSvgEl('circle', {
+              cx: (cx + Math.cos(pa) * 3.3).toFixed(1),
+              cy: (cy + Math.sin(pa) * 3.3).toFixed(1),
+              r: '2.7',
+              fill: col,
+              stroke: '#1B1714',
+              'stroke-width': '0.75'
+            }));
+          }
+          g.appendChild(createSvgEl('circle', {
+            cx: cx.toFixed(1),
+            cy: cy.toFixed(1),
+            r: '2.1',
+            fill: centerCol
+          }));
+        } else if (mode === 2) {
+          // Vibrant botanical leaf pair
+          const col = leafColors[step % leafColors.length];
+          const rot = ((step * 37) % 120) - 60;
+          g.appendChild(createSvgEl('ellipse', {
+            cx: (cx - 3).toFixed(1),
+            cy: cy.toFixed(1),
+            rx: '6.2',
+            ry: '3.1',
+            transform: `rotate(${rot - 22} ${cx.toFixed(1)} ${cy.toFixed(1)})`,
+            fill: col,
+            stroke: '#1B1714',
+            'stroke-width': '0.95'
+          }));
+          g.appendChild(createSvgEl('ellipse', {
+            cx: (cx + 3).toFixed(1),
+            cy: (cy - 1.5).toFixed(1),
+            rx: '5.2',
+            ry: '2.7',
+            transform: `rotate(${rot + 25} ${cx.toFixed(1)} ${cy.toFixed(1)})`,
+            fill: '#77B545',
+            stroke: '#1B1714',
+            'stroke-width': '0.9'
+          }));
+        } else if (mode === 3) {
+          // Mini budding cactus branch + tiny blossom tip
+          const dir = step % 2 === 0 ? 1 : -1;
+          const bx = 44 + dir * (13 + (step % 3) * 4);
+          const by = Math.max(-18, 28 - Math.min(38, step * 2.6));
+          g.setAttribute('style', `transform-origin: ${bx.toFixed(1)}px ${by.toFixed(1)}px;`);
+          g.appendChild(createSvgEl('path', {
+            d: `M${(bx - dir * 6).toFixed(1)} ${(by + 5).toFixed(1)} Q${bx.toFixed(1)} ${(by + 5).toFixed(1)} ${bx.toFixed(1)} ${(by - 5).toFixed(1)}`,
+            stroke: '#4A7E59',
+            'stroke-width': '6',
+            'stroke-linecap': 'round',
+            fill: 'none'
+          }));
+          g.appendChild(createSvgEl('path', {
+            d: `M${(bx - dir * 6).toFixed(1)} ${(by + 5).toFixed(1)} Q${bx.toFixed(1)} ${(by + 5).toFixed(1)} ${bx.toFixed(1)} ${(by - 5).toFixed(1)}`,
+            stroke: '#1B1714',
+            'stroke-width': '1',
+            'stroke-linecap': 'round',
+            fill: 'none',
+            opacity: '0.35'
+          }));
+          g.appendChild(createSvgEl('circle', {
+            cx: bx.toFixed(1),
+            cy: (by - 7).toFixed(1),
+            r: '3.1',
+            fill: flowerColors[(step + 2) % flowerColors.length],
+            stroke: '#1B1714',
+            'stroke-width': '0.85'
+          }));
+        } else {
+          // Floating petal cluster or extra miniature butterfly on milestone clicks
+          const bCol = flowerColors[step % flowerColors.length];
+          const fx = 44 + (step % 2 === 0 ? -24 : 24) + ((step * 7) % 10 - 5);
+          const fy = Math.max(-42, -16 - (step % 4) * 6);
+          const fly = createSvgEl('g', {
+            class: 'dave-butterfly',
+            style: `animation-duration: ${(2.9 + (step % 3) * 0.5).toFixed(1)}s;`
+          });
+          fly.appendChild(createSvgEl('ellipse', {
+            cx: (fx - 3.5).toFixed(1),
+            cy: fy.toFixed(1),
+            rx: '4',
+            ry: '2.7',
+            fill: bCol,
+            stroke: '#1B1714',
+            'stroke-width': '0.8'
+          }));
+          fly.appendChild(createSvgEl('ellipse', {
+            cx: (fx + 3.5).toFixed(1),
+            cy: fy.toFixed(1),
+            rx: '4',
+            ry: '2.7',
+            fill: bCol,
+            stroke: '#1B1714',
+            'stroke-width': '0.8'
+          }));
+          fly.appendChild(createSvgEl('circle', {
+            cx: fx.toFixed(1),
+            cy: fy.toFixed(1),
+            r: '1.2',
+            fill: '#1B1714'
+          }));
+          g.appendChild(fly);
+        }
+
+        // Keep DOM light if someone clicks 80+ times while still preserving rich canopy
+        if (daveProceduralCanopy.children.length > 48) {
+          daveProceduralCanopy.removeChild(daveProceduralCanopy.firstChild);
+        }
+        daveProceduralCanopy.appendChild(g);
+      }
+
+      function waterDave() {
+        if (!session.clickedAnyWork && !session.firstItem && session.daveWaterCount === 0) {
+          session.daveFirst = true;
+        }
+
+        session.daveWaterCount += 1;
+        const c = session.daveWaterCount;
+
+        // Play droplet splash + bouncy spring
+        daveCactus.classList.remove('watering', 'growth-bounce');
+        void daveCactus.offsetWidth;
+        daveCactus.classList.add('watering', 'growth-bounce');
+
+        // Update water counter badge & tooltip
+        daveWaterBadge.textContent = `💧 ${c}`;
+        daveWaterBadge.classList.add('visible');
+        daveTip.textContent = `Watered ${c}x · keep going`;
+
+        // Smoothly stretch Dave taller (asymptotically clamped so he stays framed nicely)
+        const scaleY = 1 + 0.62 * (1 - Math.exp(-c * 0.2));
+        const scaleX = 1 + 0.14 * (1 - Math.exp(-c * 0.18));
+        daveTrunkGroup.style.transform = `scale(${scaleX.toFixed(3)}, ${scaleY.toFixed(3)})`;
+
+        // Unlock Milestone Stages 1 -> 6
+        if (c >= 1) daveStages.s1.classList.add('unlocked');
+        if (c >= 2) {
+          daveStages.s2Arm.classList.add('unlocked');
+          daveStages.s2Leaves.classList.add('unlocked');
+        }
+        if (c >= 3) {
+          daveStages.s3Arm.classList.add('unlocked');
+          daveStages.s3Flower.classList.add('unlocked');
+        }
+        if (c >= 4) {
+          daveStages.s4Leaves.classList.add('unlocked');
+          daveStages.s4Flower.classList.add('unlocked');
+        }
+        if (c >= 5) {
+          daveStages.s5Blossoms.classList.add('unlocked');
+          daveStages.s5Vines.classList.add('unlocked');
+        }
+        if (c >= 6) {
+          daveStages.s6Canopy.classList.add('unlocked');
+        }
+        if (c >= 7) {
+          appendProceduralGrowth(c);
+        }
+
+        // Escalating dry deadpan speech bubbles
+        const quip = c <= daveQuips.length
+          ? daveQuips[c - 1]
+          : `Watering #${c}. Dave now has his own zip code and a board seat.`;
+        setBubble(quip, true);
+        revertBubble();
+      }
+
+      daveCactus.addEventListener('click', waterDave);
+
+      /* ----------------------------------------------------------------------
+         E. MODALS CONTROLLER
+         ---------------------------------------------------------------------- */
+      function openModal(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.add('open');
+      }
+
+      function closeAllModals() {
+        document.querySelectorAll('.modal-backdrop.open').forEach((m) => m.classList.remove('open'));
+      }
+
+      document.querySelectorAll('[data-close-modal]').forEach((btn) => {
+        btn.addEventListener('click', closeAllModals);
+      });
+
+      document.querySelectorAll('.modal-backdrop').forEach((backdrop) => {
+        backdrop.addEventListener('click', (e) => {
+          if (e.target === backdrop) closeAllModals();
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllModals();
+      });
+
+      /* ----------------------------------------------------------------------
+         F. RED-PEN EDITS (3 TABBED BEFORE -> AFTER COPY SURGERY CARDS)
+         ---------------------------------------------------------------------- */
+      const redPenCases = {
+        saas: {
+          before: 'We provide an innovative, AI-powered platform that streamlines cross-functional workflows and empowers modern teams to scale seamlessly.',
+          after: 'Your engineers aren&rsquo;t slow. They&rsquo;re losing <em>nine hours a week</em> answering status pings that should have been a 30-second check-in.',
+          note: 'Margin note: Name the Tuesday-morning irritation before mentioning a single feature.'
+        },
+        landing: {
+          before: 'Our comprehensive talent intelligence suite leverages next-generation assessments to optimize hiring efficiency and unlock enterprise ROI.',
+          after: 'You are interviewing the wrong candidates <em>70% of the time</em>. One bad hire costs ₹3.5L and four wasted weeks.',
+          note: 'Margin note: Anchor price against the painful cost of doing nothing—never against a cheaper competitor.'
+        },
+        email: {
+          before: 'Hope this email finds you well! Just circling back to touch base on how our holistic solutions can add value to your Q4 roadmap.',
+          after: 'Your pricing page asks a CFO to book a demo just to learn if they can afford you. <em>Three lines fix that.</em> Want them?',
+          note: 'Margin note: Trade polite throat-clearing for one sharp observation only an insider catches.'
+        }
+      };
+
+      const rpBeforeEl = document.getElementById('rpBefore');
+      const rpAfterEl = document.getElementById('rpAfter');
+      const rpNoteEl = document.getElementById('rpNote');
+      const rpTabs = document.querySelectorAll('.rp-tab');
+
+      function renderRedPen(key) {
+        const data = redPenCases[key] || redPenCases.saas;
+        rpTabs.forEach((t) => t.classList.toggle('active', t.getAttribute('data-rp') === key));
+
+        rpBeforeEl.classList.remove('red-slash');
+        rpBeforeEl.textContent = data.before;
+        void rpBeforeEl.offsetWidth;
+        rpBeforeEl.classList.add('red-slash');
+
+        rpAfterEl.innerHTML = data.after;
+        rpNoteEl.textContent = data.note;
+      }
+
+      rpTabs.forEach((tab) => {
+        tab.addEventListener('click', () => renderRedPen(tab.getAttribute('data-rp')));
+      });
+
+      /* ----------------------------------------------------------------------
+         G. THE RECEIPTS — CLICKABLE NDA REDACTION BARS
+         ---------------------------------------------------------------------- */
+      document.querySelectorAll('.redact-bar').forEach((bar) => {
+        bar.addEventListener('click', () => bar.classList.toggle('revealed'));
+      });
+
+      /* ----------------------------------------------------------------------
+         H. SILENT MENTALIST PAYOFF ("11 DO NOT OPEN")
+         ---------------------------------------------------------------------- */
+      const envStamp = document.getElementById('envStamp');
+      const envReadLines = document.getElementById('envReadLines');
+      const envExtraPS = document.getElementById('envExtraPS');
+      const envMailBtn = document.getElementById('envMailBtn');
+      const envCopyEmail = document.getElementById('envCopyEmail');
+      const envResetRead = document.getElementById('envResetRead');
+
+      function openMentalistEnvelope() {
+        const elapsed = Math.max(1, Math.round((Date.now() - session.startTime) / 1000));
+        const secWord = elapsed === 1 ? 'second' : 'seconds';
+        const browsedCount = session.hoveredIds.size;
+
+        envStamp.textContent = `UNSEALED AT ${elapsed} ${secWord.toUpperCase()} · ${session.inspectedIds.size} ITEMS NOTICED`;
+
+        let lines = [];
+        let subject = 'Opened your "Do Not Open" envelope';
+
+        if (session.openedEnvelopeFirst) {
+          lines = [
+            `01 / I put <em>&ldquo;Do Not Open&rdquo;</em> on a wax-sealed envelope and you broke it in <em>${elapsed} ${secWord}</em>.`,
+            browsedCount >= 3
+              ? `02 / You scanned ${browsedCount} shelf objects first, hesitated, and still couldn&rsquo;t leave the forbidden one alone.`
+              : `02 / You didn&rsquo;t even pretend to browse the work first. Pure instinct, zero obedience.`,
+            `03 / Curiosity beats compliance every single time. That&rsquo;s literally how good copy works.`
+          ];
+          subject = 'You got me with the "Do Not Open" envelope';
+        } else if (session.daveFirst && !session.firstItem) {
+          lines = [
+            `01 / Out of twelve things on the wall, you went straight for <em>Dave the cactus</em>.`,
+            `02 / You check the small details before trusting the big claims &mdash; the exact kind of buyer bad copy loses in three seconds.`,
+            `03 / And you still couldn&rsquo;t resist the envelope marked <em>Do Not Open</em>. We&rsquo;ll get along.`
+          ];
+          subject = 'Came for the portfolio, stayed to water Dave';
+        } else if (session.firstItem) {
+          const paceDesc = (session.firstActionSec && session.firstActionSec <= 5)
+            ? `decisive sprinter &mdash; moved inside ${session.firstActionSec} ${session.firstActionSec === 1 ? 'second' : 'seconds'}`
+            : browsedCount >= 4 && !session.clickedAnyWork
+              ? `serial scanner &mdash; hovered ${browsedCount} objects before committing`
+              : `careful inspector &mdash; ${elapsed} ${secWord} of quiet scouting`;
+
+          let instinctLine = `02 / You test for <em>${session.firstItem.trait}</em>.`;
+          if (session.firstItem.instinct === 'proof') {
+            instinctLine = `02 / Proof-driven. You check whether the numbers hold up long before admiring the prose.`;
+          } else if (session.firstItem.instinct === 'craft') {
+            instinctLine = `02 / Craft-driven. You can spot generic template copy from across the room, so you went straight for <em>${session.firstItem.trait}</em>.`;
+          } else if (session.firstItem.instinct === 'human') {
+            instinctLine = `02 / Signal-driven. Before reading a single word of pitch, you wanted to test <em>${session.firstItem.trait}</em>.`;
+          }
+
+          lines = [
+            `01 / Your eye pulled toward <em>${session.firstItem.name}</em> first (${paceDesc}).`,
+            instinctLine,
+            `03 / And you still broke a wax seal that literally said <em>Do Not Open</em>. Let&rsquo;s talk.`
+          ];
+          subject = `Saw ${session.firstItem.name} on your shelf — let's talk`;
+        } else {
+          lines = [
+            `01 / You spent <em>${elapsed} ${secWord}</em> quietly sizing up the room before breaking the seal.`,
+            `02 / You don&rsquo;t click impulsively &mdash; except when someone tells you not to.`,
+            `03 / That tension between skepticism and curiosity is the whole game.`
+          ];
+        }
+
+        envReadLines.innerHTML = lines.map((l) => `<p>${l}</p>`).join('');
+
+        // Build playful P.S. notes for Dave watering, face pokes, and coffee mug taps
+        const psNotes = [];
+        if (session.daveWaterCount >= 4) {
+          psNotes.push(`You watered Dave ${session.daveWaterCount} times. Compassionate, slightly chaotic, legally responsible for a jungle on Shelf 01.`);
+        } else if (session.daveWaterCount >= 1) {
+          psNotes.push(`You watered Dave (${session.daveWaterCount}x). He remembers who treats the studio well.`);
+        }
+        if (session.pokedFace) {
+          psNotes.push('Also noted: you poked my face to test the eyes.');
+        }
+        if (session.clickedMug) {
+          psNotes.push('And yes, I saw you go for the black coffee.');
+        }
+
+        if (psNotes.length > 0) {
+          envExtraPS.textContent = 'P.S. ' + psNotes.join(' ');
+          envExtraPS.classList.add('visible');
+        } else {
+          envExtraPS.classList.remove('visible');
+        }
+
+        const mailBody = `Hi Shivam,\n\nI opened the "Do Not Open" envelope on your shelf. Here's what we're building and where we need sharper copy:\n`;
+        envMailBtn.href = `mailto:ShivamSwaraas@Gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+
+        openModal('modalEnvelope');
+      }
+
+      // Safe clipboard copy using document.execCommand('copy') for iframe compatibility
+      function copyEmailSafe() {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = 'ShivamSwaraas@Gmail.com';
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          envCopyEmail.textContent = 'Copied ✓';
+          setTimeout(() => { envCopyEmail.textContent = 'Copy Email'; }, 2000);
+        } catch (err) {
+          envCopyEmail.textContent = 'ShivamSwaraas@Gmail.com';
+        }
+      }
+
+      envCopyEmail.addEventListener('click', copyEmailSafe);
+
+      envResetRead.addEventListener('click', () => {
+        session.startTime = Date.now();
+        session.firstItem = null;
+        session.firstActionSec = null;
+        session.hoveredIds.clear();
+        session.inspectedIds.clear();
+        session.clickedAnyWork = false;
+        session.openedEnvelopeFirst = false;
+        session.daveFirst = false;
+        session.daveWaterCount = 0;
+        session.pokedFace = false;
+        session.clickedMug = false;
+
+        // Reset Dave back to compact desert cactus
+        daveTrunkGroup.style.transform = '';
+        daveProceduralCanopy.innerHTML = '';
+        Object.values(daveStages).forEach((el) => el.classList.remove('unlocked'));
+        daveWaterBadge.classList.remove('visible');
+        daveWaterBadge.textContent = '💧 0';
+        daveTip.textContent = 'Click to water Dave';
+
+        closeAllModals();
+        setBubble('Observation wiped. Pick a different object first and test me again.', true);
+        revertBubble();
+      });
+    })();
+  </script>
+</body>
+</html>
